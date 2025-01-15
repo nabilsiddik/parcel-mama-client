@@ -49,6 +49,8 @@ const MyParcels = () => {
           text: "Your Parcel Is Cancled.",
           icon: "error"
         });
+
+        refetch()
       } else if (
         result.dismiss === Swal.DismissReason.cancel
       ) {

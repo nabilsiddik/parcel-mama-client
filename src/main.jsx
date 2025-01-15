@@ -14,6 +14,9 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import BookParcel from "./Dashboard/DashboardPages/BookParcel/BookParcel.jsx";
 import MyParcels from "./Dashboard/DashboardPages/MyParcels/MyParcels.jsx";
 import UpdateParcel from "./Dashboard/DashboardPages/UpdateParcel/UpdateParcel.jsx";
+import MyProfile from "./Dashboard/DashboardPages/MyProfile/MyProfile.jsx";
+import Statistics from "./Dashboard/AdminPages/Statistics/Statistics.jsx";
+import AllParcels from "./Dashboard/AdminPages/AllParcels/AllParcels.jsx";
 
 const queryClient = new QueryClient();
 const route = createBrowserRouter([
@@ -55,6 +58,18 @@ const route = createBrowserRouter([
       {
         path: 'update-parcel/:id',
         element: <UpdateParcel/>
+      }, 
+      {
+        path: 'my-profile',
+        element: <MyProfile/>
+      },
+      {
+        path: 'statistics',
+        element: <Statistics/>
+      },
+      {
+        path: 'all-parcels',
+        element: <AllParcels/>
       }
     ],
   },
