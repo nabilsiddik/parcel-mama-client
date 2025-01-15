@@ -12,7 +12,7 @@ const BookParcel = () => {
 
     const phoneNumber = form.phoneNumber.value;
     const parcelType = form.parcelType.value;
-    const parcelWeight = parseFloat(form.parcelWeight.value);
+    const parcelWeight = parseInt(form.parcelWeight.value);
     const receiverName = form.receiverName.value;
     const receiverPhoneNumber = form.receiverPhoneNumber.value;
     const deliveryAddress = form.deliveryAddress.value;

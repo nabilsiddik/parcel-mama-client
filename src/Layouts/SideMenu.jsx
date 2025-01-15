@@ -7,7 +7,7 @@ const SideMenu = () => {
       <ul className="flex flex-col gap-2">
         <NavLink className={'font-bold text-white'} to={"/dashboard"}>Home</NavLink>
         <NavLink className={'font-bold text-white'} to={"book-parcel"}>Book Parcel</NavLink>
-        <NavLink className={'font-bold text-white'} to={"all-plants"}>All Plants</NavLink>
+        <NavLink className={'font-bold text-white'} to={"my-parcels"}>My Parcels</NavLink>
       </ul>
     </div>
   );

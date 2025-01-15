@@ -10,11 +10,9 @@ import Login from "./Pages/Login/Login.jsx";
 import Registration from "./Pages/Registration/Registration.jsx";
 import DashboardLayout from "./Layouts/DashboardLayout.jsx";
 import Welcome from "./Dashboard/DashboardPages/Welcome/Welcome.jsx";
-import AddPlant from "./Dashboard/DashboardPages/AddPlant/AddPlant.jsx";
-import AllPlants from "./Dashboard/DashboardPages/AllPlants/AllPlants.jsx";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import PlantDetails from "./Dashboard/DashboardPages/PlantDetails/PlantDetails.jsx";
 import BookParcel from "./Dashboard/DashboardPages/BookParcel/BookParcel.jsx";
+import MyParcels from "./Dashboard/DashboardPages/MyParcels/MyParcels.jsx";
 
 const queryClient = new QueryClient();
 const route = createBrowserRouter([
@@ -50,12 +48,8 @@ const route = createBrowserRouter([
         element: <BookParcel />,
       },
       {
-        path: "all-plants",
-        element: <AllPlants />,
-      },
-      {
-        path: 'plant-details/:id',
-        element: <PlantDetails/>
+        path: 'my-parcels',
+        element: <MyParcels/>
       }
     ],
   },
