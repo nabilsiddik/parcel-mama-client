@@ -12,7 +12,7 @@ const MyParcels = () => {
     isLoading,
     refetch,
   } = useQuery({
-    queryKey: ["parcel"],
+    queryKey: ["parcel", user?.email],
     queryFn: async () => {
       const { data } = await axios.get(
         `${import.meta.env.VITE_MAIN_URL}/my-parcels/${user?.email}`
@@ -21,6 +21,10 @@ const MyParcels = () => {
       return data;
     },
   });
+
+  if(isLoading){
+    return <h1>Loading ...</h1>
+  }
 
   return (
     <div>
@@ -109,7 +113,7 @@ const MyParcels = () => {
           </table> */}
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
-            {parcels.map((parcel) => {
+            {parcels && parcels.length > 0 && parcels.map((parcel) => {
               const {
                 _id,
                 phoneNumber,
@@ -130,6 +134,9 @@ const MyParcels = () => {
                 <div className="shadow-lg border p-5">
                   <p>
                     <b>Parcel Type: </b> {parcelType && parcelType}
+                  </p>
+                  <p>
+                    <b>Delivery Address: </b> {deliveryAddress && deliveryAddress}
                   </p>
                   <p>
                     <b>Requested Delivery Date: </b>{" "}
@@ -153,7 +160,9 @@ const MyParcels = () => {
                     <b>Booking Type: </b>
                   </p>
                   <div className="flex items-center justify-between mt-3">
-                    <button className="btn bg-success">Update</button>
+                    <Link to={`/dashboard/update-parcel/${_id}`}>
+                      <button className="btn bg-success">Update</button>
+                    </Link>
                     <button className="btn bg-primary">Cancle</button>
                   </div>
                   <div className="flex items-center justify-between mt-3">

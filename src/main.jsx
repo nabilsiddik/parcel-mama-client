@@ -13,6 +13,7 @@ import Welcome from "./Dashboard/DashboardPages/Welcome/Welcome.jsx";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import BookParcel from "./Dashboard/DashboardPages/BookParcel/BookParcel.jsx";
 import MyParcels from "./Dashboard/DashboardPages/MyParcels/MyParcels.jsx";
+import UpdateParcel from "./Dashboard/DashboardPages/UpdateParcel/UpdateParcel.jsx";
 
 const queryClient = new QueryClient();
 const route = createBrowserRouter([
@@ -50,6 +51,10 @@ const route = createBrowserRouter([
       {
         path: 'my-parcels',
         element: <MyParcels/>
+      },
+      {
+        path: 'update-parcel/:id',
+        element: <UpdateParcel/>
       }
     ],
   },
