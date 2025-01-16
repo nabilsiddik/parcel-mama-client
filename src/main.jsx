@@ -17,6 +17,7 @@ import UpdateParcel from "./Dashboard/DashboardPages/UpdateParcel/UpdateParcel.j
 import MyProfile from "./Dashboard/DashboardPages/MyProfile/MyProfile.jsx";
 import Statistics from "./Dashboard/AdminPages/Statistics/Statistics.jsx";
 import AllParcels from "./Dashboard/AdminPages/AllParcels/AllParcels.jsx";
+import AllUsers from "./Dashboard/AdminPages/AllUsers/AllUsers.jsx";
 
 const queryClient = new QueryClient();
 const route = createBrowserRouter([
@@ -71,6 +72,10 @@ const route = createBrowserRouter([
         path: "all-parcels",
         element: <AllParcels />,
       },
+      {
+        path: 'all-users',
+        element: <AllUsers/>
+      }
     ],
   },
 ]);

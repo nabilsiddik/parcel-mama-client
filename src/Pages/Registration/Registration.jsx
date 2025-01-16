@@ -18,6 +18,7 @@ const Registration = () => {
     const name = form.name.value;
     const password = form.password.value;
     const email = form.email.value;
+    const phone = form.phone.value;
     const image = form.image.files[0]
     const role = form.role.value
 
@@ -27,6 +28,7 @@ const Registration = () => {
     await axios.post(`${import.meta.env.VITE_MAIN_URL}/users/${email}`, {
       name,
       email,
+      phone,
       image: imageUrl,
       role,
     });
@@ -92,6 +94,21 @@ const Registration = () => {
               className="input input-bordered"
             />
           </div>
+
+          <div className="form-control">
+            <label className="label">
+              <span className="label-text">
+                Phone <span className="text-red-600"> *</span>
+              </span>
+            </label>
+            <input
+              name="phone"
+              type="tel"
+              placeholder="Phone Number"
+              className="input input-bordered"
+            />
+          </div>
+
           <div className="form-control">
             <label className="label">
               <span className="label-text">
