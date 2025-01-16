@@ -52,35 +52,35 @@ const route = createBrowserRouter([
         element: <BookParcel />,
       },
       {
-        path: 'my-parcels',
-        element: <MyParcels/>
+        path: "my-parcels",
+        element: <MyParcels />,
       },
       {
-        path: 'update-parcel/:id',
-        element: <UpdateParcel/>
-      }, 
-      {
-        path: 'my-profile',
-        element: <MyProfile/>
+        path: "update-parcel/:id",
+        element: <UpdateParcel />,
       },
       {
-        path: 'statistics',
-        element: <Statistics/>
+        path: "my-profile",
+        element: <MyProfile />,
       },
       {
-        path: 'all-parcels',
-        element: <AllParcels/>
-      }
+        path: "statistics",
+        element: <Statistics />,
+      },
+      {
+        path: "all-parcels",
+        element: <AllParcels />,
+      },
     ],
   },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <AuthContextProvider>
-      <QueryClientProvider client = {queryClient}>
+    <QueryClientProvider client = {queryClient}>
+      <AuthContextProvider>
         <RouterProvider router={route} />
-      </QueryClientProvider>
-    </AuthContextProvider>
+      </AuthContextProvider>
+    </QueryClientProvider>
   </React.StrictMode>
 );

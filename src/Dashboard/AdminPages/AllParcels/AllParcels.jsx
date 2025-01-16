@@ -1,9 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import ManageParcelModal from "../../../Components/Modals/ManageParcelModal/ManageParcelModal";
 
 const AllParcels = () => {
+  const[isOpen, setIsOpen] = useState(false);
   const {
     data: allParcels = [],
     isLoading,
@@ -66,7 +68,7 @@ const AllParcels = () => {
 
   return (
     <div>
-      <h1>My Parcels</h1>
+      <h1>All Parcels</h1>
       <div>
         <div className="overflow-x-auto">
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
@@ -76,19 +78,10 @@ const AllParcels = () => {
                   _id,
                   price,
                   phoneNumber,
-                  parcelType,
-                  parcelWeight,
-                  receiverName,
-                  receiverPhoneNumber,
-                  deliveryAddress,
                   deliveryDate,
-                  latitude,
-                  longitude,
                   bookingDate,
                   status,
-                  apprDeliDate,
-                  deliveryManId,
-                  customer: {name, email}
+                  customer: {name}
                 } = parcel;
                 return (
                   <div key={_id} className="shadow-lg border p-5">
@@ -117,26 +110,11 @@ const AllParcels = () => {
                     </p>
 
                     <div className="flex items-center justify-between mt-3">
-                      <Link to={`/dashboard/update-parcel/${_id}`}>
-                        <button
-                          className="btn bg-success"
-                          disabled={status === "pending" ? false : true}
-                        >
-                          Update
-                        </button>
-                      </Link>
-                      <button
-                        onClick={() => handleCancleParcel(_id)}
-                        className="btn bg-primary"
-                        disabled={status === "pending" ? false : true}
-                      >
-                        Cancle
-                      </button>
+                        <button onClick={() => setIsOpen(true)} className="btn w-full bg-purple-600 text-white ">Manage</button>
+
                     </div>
-                    <div className="flex items-center justify-between mt-3">
-                      <button className="btn bg-success">Review</button>
-                      <button className="btn bg-primary">Pay</button>
-                    </div>
+
+                    <ManageParcelModal isOpen={isOpen} setIsOpen={setIsOpen} allParcels = {allParcels} _id = {_id}/>
                   </div>
                 );
               })}

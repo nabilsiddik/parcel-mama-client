@@ -1,0 +1,92 @@
+import React, { useContext } from "react";
+import { Button, Dialog, DialogPanel, DialogTitle } from "@headlessui/react";
+import { useState } from "react";
+import { authContext } from "../../../Contexts/AuthContext/AuthContext";
+import axios from "axios";
+
+const ManageParcelModal = ({ isOpen, setIsOpen, _id}) => {
+  const { allUsers } = useContext(authContext);
+
+  const getAllDeliveryMens = () => {
+    const deliveryMens =
+      allUsers.length > 0 &&
+      allUsers.filter((user) => user?.role === "deliveryman");
+
+    return deliveryMens;
+  };
+
+  const handleAssignDeliveryMan = async(e) => {
+    e.preventDefault()
+    const form = e.target
+
+    const deliveryMan = form.deliveryman.value
+    const apprDelDate = form.apprDelDate.value
+
+
+    const res = await axios.patch(`${import.meta.env.VITE_MAIN_URL}/parcel/${_id}`, {deliveryMan, apprDelDate})
+  };
+
+  return (
+    <div>
+      <Dialog
+        open={isOpen}
+        as="div"
+        className="relative z-10 focus:outline-none"
+        onClose={() => setIsOpen(false)}
+      >
+        <div className="fixed inset-0 z-10 w-screen overflow-y-auto">
+          <div className="flex min-h-full items-center justify-center p-4">
+            <DialogPanel
+              transition
+              className="w-full max-w-md rounded-xl bg-white p-6 backdrop-blur-2xl duration-300 ease-out data-[closed]:transform-[scale(95%)] data-[closed]:opacity-0 shadow-lg"
+            >
+              <DialogTitle as="h3" className="text-base/7 font-medium">
+                Manage Parcel
+              </DialogTitle>
+
+              <form onSubmit={handleAssignDeliveryMan}>
+                <div className="mb-3">
+                  <select
+                    name="deliveryman"
+                    className="select select-bordered w-full"
+                  >
+                    {getAllDeliveryMens().length > 0 &&
+                      getAllDeliveryMens().map((deliveryMan, index) => {
+                        return (
+                          <option key={index} value={deliveryMan._id}>
+                            {deliveryMan.name}
+                          </option>
+                        );
+                      })}
+                  </select>
+                </div>
+
+                <div>
+                  <input name="apprDelDate" type="date" className="input input-bordered w-full" />
+                </div>
+
+                <div>
+                  <input type="submit"
+                    className="btn bg-purple-600 w-full mt-3 text-white"
+                    value={"Assign"}
+                  />
+                </div>
+              </form>
+
+              <div className="mt-4">
+                <Button
+                  className="inline-flex items-center gap-2 rounded-md bg-gray-700 py-1.5 px-3 text-sm/6 font-semibold text-white shadow-inner shadow-white/10 focus:outline-none data-[hover]:bg-gray-600 data-[focus]:outline-1 data-[focus]:outline-white data-[open]:bg-gray-700"
+                  onClick={() => setIsOpen(false)}
+                >
+                  Close Modal
+                </Button>
+              </div>
+            </DialogPanel>
+          </div>
+        </div>
+      </Dialog>
+    </div>
+  );
+};
+
+export default ManageParcelModal;

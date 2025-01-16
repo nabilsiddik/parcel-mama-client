@@ -12,6 +12,7 @@ import { createContext } from "react";
 import Swal from "sweetalert2";
 import { auth } from "../../Firebase/firebase.init";
 import axios from "axios";
+import { useQuery } from "@tanstack/react-query";
 
 export const authContext = createContext(null);
 
@@ -24,6 +25,25 @@ const AuthContextProvider = ({ children }) => {
     return localStorage.getItem("theme") === "dark";
   });
   const [limitNumberOfEquipment, setLimitNumberOfEquipment] = useState([]);
+
+
+  const {
+    data: allUsers = [],
+    isLoading,
+    refetch,
+  } = useQuery({
+    queryKey: ["users"],
+    queryFn: async () => {
+      const { data } = await axios.get(
+        `${import.meta.env.VITE_MAIN_URL}/users`
+      );
+
+      return data;
+    },
+  });
+
+
+
 
   useEffect(() => {
     const root = document.documentElement;
@@ -197,6 +217,7 @@ const AuthContextProvider = ({ children }) => {
     setAllTutorials,
     darkMode,
     setDarkMode,
+    allUsers
   };
 
   return (

@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { authContext } from "../../Contexts/AuthContext/AuthContext";
 import { FaGoogle } from "react-icons/fa";
@@ -19,9 +19,17 @@ const Registration = () => {
     const password = form.password.value;
     const email = form.email.value;
     const image = form.image.files[0]
+    const role = form.role.value
 
     const imageUrl = await imageUpload(image)
-    createUser(email, password, name, imageUrl);
+    createUser(email, password, name, imageUrl)
+
+    await axios.post(`${import.meta.env.VITE_MAIN_URL}/users/${email}`, {
+      name,
+      email,
+      image: imageUrl,
+      role,
+    });
   }
 
   return (
@@ -97,6 +105,12 @@ const Registration = () => {
               className="input input-bordered"
             />
           </div>
+
+          <select name="role" className="select select-bordered">
+            <option value="user" selected>User</option>
+            <option value="deliveryman">Delivery Man</option>
+          </select>
+          
           <label className="label block">
             Already have an account?{" "}
             <Link className="underline" to="/login">
