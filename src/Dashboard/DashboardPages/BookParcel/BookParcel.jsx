@@ -6,7 +6,7 @@ import Swal from "sweetalert2";
 const BookParcel = () => {
   const { user } = useContext(authContext);
 
-  const handleAddPlant = async (e) => {
+  const handleAddParcel = async (e) => {
     e.preventDefault();
     const form = e.target;
 
@@ -44,6 +44,10 @@ const BookParcel = () => {
       );
 
       if (res.data.insertedId) {
+        const patchResponse = await axios.patch(
+          `${import.meta.env.VITE_MAIN_URL}/increment-booked-parcel/${user?.email}`,
+          parcel
+        );
         Swal.fire({
           position: "center center",
           icon: "success",
@@ -60,13 +64,14 @@ const BookParcel = () => {
         footer: `${error.code}. ${error.message}`,
       })
     }
+
   };
 
   return (
     <div>
       <h1>Book Parcel</h1>
 
-      <form onSubmit={handleAddPlant} className="w-11/12 md:w-8/12 lg:w-6/12">
+      <form onSubmit={handleAddParcel} className="w-11/12 md:w-8/12 lg:w-6/12">
         <div className="input-group mb-3">
           <label className="label">Phone Number</label>
           <input

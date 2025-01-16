@@ -24,7 +24,7 @@ const AllUsers = () => {
       <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
         {allUsers &&
           allUsers.map((user) => {
-            const { _id, name, email, image, role, timeStamp, phone, totalSpent} = user;
+            const { _id, name, email, image, role, timeStamp, phone, totalSpent, bookedParcel} = user;
 
             return (
               <div key={user._id} className="shadow-lg border p-5">
@@ -36,7 +36,7 @@ const AllUsers = () => {
                   <b>Phone Number:</b> {phone && phone}
                 </p>
                 <p>
-                  <b>Parcels Booked:</b>
+                  <b>Parcels Booked:</b> {bookedParcel && bookedParcel}
                 </p>
                 <p>
                   <b>Total Spent:</b> {totalSpent && totalSpent}

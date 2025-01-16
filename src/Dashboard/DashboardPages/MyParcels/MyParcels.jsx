@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { authContext } from "../../../Contexts/AuthContext/AuthContext";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
@@ -22,6 +22,7 @@ const MyParcels = () => {
       return data;
     },
   });
+
 
   const handleCancleParcel = (_id) => {
     const swalWithBootstrapButtons = Swal.mixin({
