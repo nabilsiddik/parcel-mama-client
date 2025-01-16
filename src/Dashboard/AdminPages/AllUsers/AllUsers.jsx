@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import React from "react";
+import Swal from "sweetalert2";
 
 const AllUsers = () => {
   const {
@@ -8,7 +9,7 @@ const AllUsers = () => {
     isLoading,
     refetch,
   } = useQuery({
-    queryKey: ["parcels"],
+    queryKey: ["users"],
     queryFn: async () => {
       const { data } = await axios.get(
         `${import.meta.env.VITE_MAIN_URL}/users`
@@ -17,6 +18,87 @@ const AllUsers = () => {
       return data;
     },
   })
+
+
+  const handleMakeAdmin = (_id) => {
+    const swalWithBootstrapButtons = Swal.mixin({
+      customClass: {
+        confirmButton: "btn btn-success",
+        cancelButton: "btn btn-danger"
+      },
+      buttonsStyling: false
+    });
+    swalWithBootstrapButtons.fire({
+      title: "Are you sure?",
+      text: "You want to make him/her Admin",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Yes",
+      cancelButtonText: "No",
+      reverseButtons: true
+    }).then(async(result) => {
+      if (result.isConfirmed) {
+        swalWithBootstrapButtons.fire({
+          title: "Admin Done!",
+          text: "You made him/her admin",
+          icon: "success"
+        });
+
+        // Make admin request to database
+        const res = await axios.patch(`${import.meta.env.VITE_MAIN_URL}/make-admin/${_id}`)
+
+        refetch()
+      } else if (
+        result.dismiss === Swal.DismissReason.cancel
+      ) {
+        swalWithBootstrapButtons.fire({
+          title: "Alright",
+          text: "User Role is the Same as Before",
+          icon: "error"
+        });
+      }
+    });
+  }
+
+  const handleMakeDeliveryMan = (_id) => {
+    const swalWithBootstrapButtons = Swal.mixin({
+      customClass: {
+        confirmButton: "btn btn-success",
+        cancelButton: "btn btn-danger"
+      },
+      buttonsStyling: false
+    });
+    swalWithBootstrapButtons.fire({
+      title: "Are you sure?",
+      text: "You want to make him/her Delivery Man?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Yes",
+      cancelButtonText: "No",
+      reverseButtons: true
+    }).then(async(result) => {
+      if (result.isConfirmed) {
+        swalWithBootstrapButtons.fire({
+          title: "Delivery Man Done!",
+          text: "You made him/her Delivery Man",
+          icon: "success"
+        });
+
+        // Make admin request to database
+        const res = await axios.patch(`${import.meta.env.VITE_MAIN_URL}/make-deliveryman/${_id}`)
+
+        refetch()
+      } else if (
+        result.dismiss === Swal.DismissReason.cancel
+      ) {
+        swalWithBootstrapButtons.fire({
+          title: "Alright",
+          text: "User Role is the Same as Before",
+          icon: "error"
+        });
+      }
+    });
+  }
 
   return (
     <div>
@@ -41,6 +123,9 @@ const AllUsers = () => {
                 <p>
                   <b>Total Spent:</b> {totalSpent && totalSpent}
                 </p>
+
+                <button onClick={() => handleMakeAdmin(_id)} className="btn bg-secondary w-full mt-2 text-white">Make Admin</button>
+                <button onClick={() => handleMakeDeliveryMan(_id)} className="btn bg-secondary w-full mt-2 text-white">Make Delivery Man</button>
               </div>
             );
           })}

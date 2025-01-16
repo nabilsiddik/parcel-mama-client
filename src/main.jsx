@@ -18,6 +18,9 @@ import MyProfile from "./Dashboard/DashboardPages/MyProfile/MyProfile.jsx";
 import Statistics from "./Dashboard/AdminPages/Statistics/Statistics.jsx";
 import AllParcels from "./Dashboard/AdminPages/AllParcels/AllParcels.jsx";
 import AllUsers from "./Dashboard/AdminPages/AllUsers/AllUsers.jsx";
+import AllDeliveryMan from "./Dashboard/AdminPages/AllDeliveryMen/AllDeliveryMan.jsx";
+import MyDeliveryList from "./Dashboard/DeliveryManPages/MyDeliveryList/MyDeliveryList.jsx";
+import AllReviews from "./Dashboard/DeliveryManPages/AllReviews/AllReviews.jsx";
 
 const queryClient = new QueryClient();
 const route = createBrowserRouter([
@@ -75,6 +78,18 @@ const route = createBrowserRouter([
       {
         path: 'all-users',
         element: <AllUsers/>
+      },
+      {
+        path: 'all-delivery-man',
+        element: <AllDeliveryMan></AllDeliveryMan>
+      },
+      {
+        path: 'my-delivery-list',
+        element: <MyDeliveryList/>
+      },
+      {
+        path: 'all-reviews',
+        element: <AllReviews/>
       }
     ],
   },

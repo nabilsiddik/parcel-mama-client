@@ -24,7 +24,7 @@ const SideMenu = () => {
 
   return (
     <div className="p-4">
-      {currentUser?.role === "user" ? (
+      {currentUser?.role === "user" && (
         <ul className="flex flex-col gap-2">
           <NavLink className={"font-bold text-white"} to={"/dashboard"}>
             Home
@@ -39,7 +39,9 @@ const SideMenu = () => {
             My Profile
           </NavLink>
         </ul>
-      ) : (
+      )}
+
+      {currentUser?.role === "admin" && (
         <ul className="flex flex-col gap-2">
           <NavLink className={"font-bold text-white"} to={"statistics"}>
             Statistics
@@ -47,11 +49,22 @@ const SideMenu = () => {
           <NavLink className={"font-bold text-white"} to={"all-parcels"}>
             All Parcels
           </NavLink>
-          <NavLink className={"font-bold text-white"} to={"all-delivery-men"}>
+          <NavLink className={"font-bold text-white"} to={"all-delivery-man"}>
             All Delevery Men
           </NavLink>
           <NavLink className={"font-bold text-white"} to={"all-users"}>
             All Users
+          </NavLink>
+        </ul>
+      )}
+
+      {currentUser?.role === "deliveryman" && (
+        <ul className="flex flex-col gap-2">
+          <NavLink className={"font-bold text-white"} to={"my-delivery-list"}>
+            My Delivery List
+          </NavLink>
+          <NavLink className={"font-bold text-white"} to={"all-reviews"}>
+            All Reviews
           </NavLink>
         </ul>
       )}
