@@ -15,7 +15,7 @@ const ManageParcelModal = ({ isOpen, setIsOpen, _id}) => {
     return deliveryMens;
   };
 
-  const handleAssignDeliveryMan = async(e) => {
+  const handleAssignDeliveryMan = async(e, _id) => {
     e.preventDefault()
     const form = e.target
 
@@ -23,7 +23,9 @@ const ManageParcelModal = ({ isOpen, setIsOpen, _id}) => {
     const apprDelDate = form.apprDelDate.value
 
 
-    const res = await axios.patch(`${import.meta.env.VITE_MAIN_URL}/parcel/${_id}`, {deliveryMan, apprDelDate})
+    const res = await axios.patch(`${import.meta.env.VITE_MAIN_URL}/setdeliveryman/${_id}`, {deliveryMan, apprDelDate})
+
+    console.log(_id)
   };
 
   return (
@@ -44,7 +46,7 @@ const ManageParcelModal = ({ isOpen, setIsOpen, _id}) => {
                 Manage Parcel
               </DialogTitle>
 
-              <form onSubmit={handleAssignDeliveryMan}>
+              <form onSubmit={(e) => handleAssignDeliveryMan(e, _id)}>
                 <div className="mb-3">
                   <select
                     name="deliveryman"

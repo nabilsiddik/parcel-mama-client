@@ -18,7 +18,7 @@ const Header = () => {
                 tabIndex={0}
                 className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow  dark:bg-red-600">
                 <li><NavLink to={'/'}>Home</NavLink></li>
-                <li><NavLink to={'/dashboard'}>Dashboard</NavLink></li>
+                {user?.email && <li><NavLink to={'/dashboard'}>Dashboard</NavLink></li>}
             </ul>
         </nav>
 
@@ -27,7 +27,7 @@ const Header = () => {
             tabIndex={0}
             className="menu menu-horizontal px-1">
             <li><NavLink className={'text-white text-md'} to={'/'}>Home</NavLink></li>
-            <li><NavLink to={'/dashboard'}>Dashboard</NavLink></li>
+            {user?.email && <li><NavLink to={'/dashboard'}>Dashboard</NavLink></li>}
         </ul>
     </nav>
 

@@ -7,6 +7,7 @@ import ManageParcelModal from "../../../Components/Modals/ManageParcelModal/Mana
 const AllParcels = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [filteredParcels, setFilteredParcels] = useState([])
+  const [selectedParcelId, setSelectedParcelId] = useState(null)
 
   const {
     data: allParcels = [],
@@ -65,6 +66,10 @@ const AllParcels = () => {
   //   };
 
 
+  const handleOpenModal = (parcelId) => {
+    setSelectedParcelId(parcelId);
+    setIsOpen(true);
+  };
 
   const handleSearchByDate = async(e) => {
     e.preventDefault()
@@ -156,7 +161,7 @@ const AllParcels = () => {
 
                     <div className="flex items-center justify-between mt-3">
                       <button
-                        onClick={() => setIsOpen(true)}
+                        onClick={() => handleOpenModal(_id)}
                         className="btn w-full bg-purple-600 text-white "
                       >
                         Manage
@@ -167,7 +172,7 @@ const AllParcels = () => {
                       isOpen={isOpen}
                       setIsOpen={setIsOpen}
                       allParcels={allParcels}
-                      _id={_id}
+                      _id={selectedParcelId}
                     />
                   </div>
                 );
