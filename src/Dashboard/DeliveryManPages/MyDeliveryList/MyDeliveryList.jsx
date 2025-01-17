@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
 import { authContext } from "../../../Contexts/AuthContext/AuthContext";
+import Swal from "sweetalert2";
 
 const MyDeliveryList = () => {
   const { user } = useContext(authContext);
@@ -22,7 +23,7 @@ const MyDeliveryList = () => {
 
   console.log(deliveryManId);
 
-  const { data: deliveryList = [], isLoading } = useQuery(
+  const { data: deliveryList = [], isLoading, refetch } = useQuery(
     ["delivery", deliveryManId],
     async () => {
       const { data } = await axios.get(
@@ -35,7 +36,112 @@ const MyDeliveryList = () => {
     }
   );
 
-  console.log("list", deliveryList);
+
+
+  const cancleDelivery = (_id) => {
+    const swalWithBootstrapButtons = Swal.mixin({
+      customClass: {
+        confirmButton: "btn btn-success",
+        cancelButton: "btn btn-danger"
+      },
+      buttonsStyling: false
+    });
+    swalWithBootstrapButtons.fire({
+      title: "Are you sure?",
+      text: "You want to cancle the parcel?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Yes, Cancle It!",
+      cancelButtonText: "No Not Cancle!",
+      reverseButtons: true
+    }).then(async(result) => {
+      if (result.isConfirmed) {
+
+        const res = await axios.patch(`${import.meta.env.VITE_MAIN_URL}/cancle-parcel/${_id}`)
+
+        if(res.data.modifiedCount > 0){
+          refetch()
+          swalWithBootstrapButtons.fire({
+            title: "Cancled!",
+            text: "Parcel Cancled.",
+            icon: "error"
+          });
+        }else{
+          swalWithBootstrapButtons.fire({
+            title: "Error",
+            text: "Error while canclation",
+            icon: "error"
+          });
+        }
+
+     
+      } else if (
+        result.dismiss === Swal.DismissReason.cancel
+      ) {
+        swalWithBootstrapButtons.fire({
+          title: "Not Cancled",
+          text: "Parcel Not Cancled",
+          icon: "success"
+        });
+      }
+    });
+  }
+
+
+
+
+
+
+  const handleDelivered = (_id) => {
+    const swalWithBootstrapButtons = Swal.mixin({
+      customClass: {
+        confirmButton: "btn btn-success",
+        cancelButton: "btn btn-danger"
+      },
+      buttonsStyling: false
+    });
+    swalWithBootstrapButtons.fire({
+      title: "Are you sure?",
+      text: "You want to deliver the parcel?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Delever It!",
+      cancelButtonText: "Cancle",
+      reverseButtons: true
+    }).then(async(result) => {
+      if (result.isConfirmed) {
+
+        const res = await axios.patch(`${import.meta.env.VITE_MAIN_URL}/delivered-parcel/${_id}`)
+
+        if(res.data.modifiedCount > 0){
+          refetch()
+          swalWithBootstrapButtons.fire({
+            title: "Delivered!",
+            text: "Parcel Delivered.",
+            icon: "success"
+          });
+        }else{
+          swalWithBootstrapButtons.fire({
+            title: "Error",
+            text: "Error while deliver",
+            icon: "error"
+          });
+        }
+
+     
+      } else if (
+        result.dismiss === Swal.DismissReason.cancel
+      ) {
+        swalWithBootstrapButtons.fire({
+          title: "Cancled",
+          text: "Parcel Not delivered",
+          icon: "error"
+        });
+      }
+    });
+  }
+
+
 
   if (isLoading) {
     return <h1>Loading ...</h1>;
@@ -94,6 +200,18 @@ const MyDeliveryList = () => {
                 <p>
                   <b>Receivers Address:</b> {deliveryAddress && deliveryAddress}
                 </p>
+
+                <button className="btn mt-3 bg-purple-600 text-white">
+                  View Location
+                </button>
+                <div className="flex items-center justify-between">
+                  <button disabled={status === 'cancled' || status === 'delivered' ? true : false} onClick={() => cancleDelivery(_id)} className="btn mt-3 bg-purple-600 text-white">
+                    Cancle
+                  </button>
+                  <button disabled={status === 'cancled' || status === 'delivered' ? true : false} onClick={() => handleDelivered(_id)} className="btn mt-3 bg-purple-600 text-white">
+                    Deliver
+                  </button>
+                </div>
               </div>
             );
           })}
