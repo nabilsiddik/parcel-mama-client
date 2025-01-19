@@ -5,7 +5,7 @@ import { NavLink } from 'react-router-dom';
 
 const Footer = () => {
     return (
-        <footer id='footer' className='bg-purple-600 py-10'>
+        <footer id='footer' className='bg-black py-10'>
             <div className="container footer text-neutral-content p-10">
                 <nav>
                     <img src={''} alt="" />

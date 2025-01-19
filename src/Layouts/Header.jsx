@@ -32,7 +32,7 @@ const Header = () => {
     </nav>
 
     return (
-        <header id='header' className='bg-purple-600 py-2'>
+        <header id='header' className='bg-gradient-to-r from-[#fc0] to-[#fc0] shadow-xl py-2 border-b-2 border-gray fixed w-full z-[99999]'>
             <div className="container">
                 <div className="navbar flex flex-col md:flex-row gap-4">
                     <div className="navbar-start flex justify-center">
