@@ -22,6 +22,7 @@ import AllDeliveryMan from "./Dashboard/AdminPages/AllDeliveryMen/AllDeliveryMan
 import MyDeliveryList from "./Dashboard/DeliveryManPages/MyDeliveryList/MyDeliveryList.jsx";
 import AllReviews from "./Dashboard/DeliveryManPages/AllReviews/AllReviews.jsx";
 import PrivateRoute from "./PrivateRoute/PrivateRoute.jsx";
+import AuthenticationPage from "./Pages/AuthenticationPage/AuthenticationPage";
 
 const queryClient = new QueryClient();
 const route = createBrowserRouter([
@@ -36,7 +37,11 @@ const route = createBrowserRouter([
       },
       {
         path: "/login",
-        element: <Login />,
+        element: <AuthenticationPage />,
+      },
+      {
+        path: '/log',
+        element: <Login/>
       },
       {
         path: "/registration",
