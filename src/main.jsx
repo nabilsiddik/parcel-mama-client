@@ -21,6 +21,7 @@ import AllUsers from "./Dashboard/AdminPages/AllUsers/AllUsers.jsx";
 import AllDeliveryMan from "./Dashboard/AdminPages/AllDeliveryMen/AllDeliveryMan.jsx";
 import MyDeliveryList from "./Dashboard/DeliveryManPages/MyDeliveryList/MyDeliveryList.jsx";
 import AllReviews from "./Dashboard/DeliveryManPages/AllReviews/AllReviews.jsx";
+import PrivateRoute from "./PrivateRoute/PrivateRoute.jsx";
 
 const queryClient = new QueryClient();
 const route = createBrowserRouter([
@@ -45,51 +46,75 @@ const route = createBrowserRouter([
   },
   {
     path: "/dashboard",
-    element: <DashboardLayout />,
+    element: <PrivateRoute>
+      <DashboardLayout />
+    </PrivateRoute>,
     children: [
       {
         index: true,
-        element: <Welcome />,
+        element: <PrivateRoute>
+        <Welcome />
+      </PrivateRoute>,
       },
       {
         path: "book-parcel",
-        element: <BookParcel />,
+        element: <PrivateRoute>
+        <BookParcel />
+      </PrivateRoute>,
       },
       {
         path: "my-parcels",
-        element: <MyParcels />,
+        element: <PrivateRoute>
+        <MyParcels />
+      </PrivateRoute>,
       },
       {
         path: "update-parcel/:id",
-        element: <UpdateParcel />,
+        element: <PrivateRoute>
+        <UpdateParcel />
+      </PrivateRoute>,
       },
       {
         path: "my-profile",
-        element: <MyProfile />,
+        element: <PrivateRoute>
+        <MyProfile />
+      </PrivateRoute>,
       },
       {
         path: "statistics",
-        element: <Statistics />,
+        element: <PrivateRoute>
+        <Statistics />
+      </PrivateRoute>,
       },
       {
         path: "all-parcels",
-        element: <AllParcels />,
+        element: <PrivateRoute>
+        <AllParcels />
+      </PrivateRoute>,
       },
       {
         path: 'all-users',
-        element: <AllUsers/>
+        element: <PrivateRoute>
+        <AllUsers/>
+      </PrivateRoute>
       },
       {
         path: 'all-delivery-man',
-        element: <AllDeliveryMan></AllDeliveryMan>
+        element: <PrivateRoute>
+        <AllDeliveryMan/>
+      </PrivateRoute>
       },
       {
         path: 'my-delivery-list',
-        element: <MyDeliveryList/>
+        element: <PrivateRoute>
+        <MyDeliveryList/>
+      </PrivateRoute>
       },
       {
         path: 'all-reviews',
-        element: <AllReviews/>
+        element: <PrivateRoute>
+        <AllReviews/>
+      </PrivateRoute>
       }
     ],
   },

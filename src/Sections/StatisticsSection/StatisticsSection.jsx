@@ -12,7 +12,7 @@ const StatisticsSection = () => {
         queryKey: ["users"],
         queryFn: async () => {
           const { data } = await axios.get(`
-            ${impori.meta.env.VITE_MAIN_URL}/users`);
+            ${import.meta.env.VITE_MAIN_URL}/users`);
     
           return data;
         },

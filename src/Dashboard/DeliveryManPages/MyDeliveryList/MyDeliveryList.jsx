@@ -21,7 +21,6 @@ const MyDeliveryList = () => {
     fetchDeliveryManId();
   }, [user?.email]);
 
-  console.log(deliveryManId);
 
   const { data: deliveryList = [], isLoading, refetch } = useQuery(
     ["delivery", deliveryManId],
@@ -55,6 +54,7 @@ const MyDeliveryList = () => {
       cancelButtonText: "No Not Cancle!",
       reverseButtons: true
     }).then(async(result) => {
+      
       if (result.isConfirmed) {
 
         const res = await axios.patch(`${import.meta.env.VITE_MAIN_URL}/cancle-parcel/${_id}`)
@@ -89,9 +89,6 @@ const MyDeliveryList = () => {
 
 
 
-
-
-
   const handleDelivered = (_id) => {
     const swalWithBootstrapButtons = Swal.mixin({
       customClass: {
@@ -113,7 +110,11 @@ const MyDeliveryList = () => {
 
         const res = await axios.patch(`${import.meta.env.VITE_MAIN_URL}/delivered-parcel/${_id}`)
 
-        if(res.data.modifiedCount > 0){
+        const { parcelResult, deliveryManResult } = res.data
+
+        if(parcelResult?.modifiedCount > 0 &&
+          deliveryManResult?.modifiedCount > 0){
+
           refetch()
           swalWithBootstrapButtons.fire({
             title: "Delivered!",
@@ -175,7 +176,7 @@ const MyDeliveryList = () => {
             } = deliveredParcel;
 
             return (
-              <div key={user._id} className="shadow-lg border p-5">
+              <div key={deliveredParcel._id} className="shadow-lg border p-5">
                 <h3>
                   <b>Booked User’s Name: </b>
                   {name && name}
