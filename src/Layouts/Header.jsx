@@ -4,9 +4,11 @@ import { authContext } from '../Contexts/AuthContext/AuthContext'
 import { MdDarkMode } from "react-icons/md";
 import { MdLightMode } from "react-icons/md";
 
+import logo from "../assets/delivery.png"
+
 const Header = () => {
 
-    const { user, userSignOut, darkMode, setDarkMode} = useContext(authContext)
+    const { user, userSignOut, darkMode, setDarkMode } = useContext(authContext)
 
     const handleLogout = () => {
         userSignOut()
@@ -53,8 +55,12 @@ const Header = () => {
                             </div>
                             {mobileMenu}
                         </div>
-                        <a className="text-xl">
-                            <h2>Parcel Mama</h2>
+                        <a className="text-xl flex items-center gap-3">
+                            <img className='w-[80px]' src={logo} alt="" />
+                            <div className='ml-[-8px]'>
+                                <h3 className='font-bold text-4xl'>PARCEL</h3>
+                                <h4 className='font-bold text-3xl mt-[-10px] ml-[10px] text-[#ff3f34] '>mama</h4>
+                            </div>
                         </a>
                     </div>
                     <div className="navbar-center hidden lg:flex">

@@ -7,6 +7,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
+import StatisticsCard from '@/Components/StatisticsCard/StatisticsCard';
 
 
 const StatisticsSection = () => {
@@ -56,45 +57,13 @@ const StatisticsSection = () => {
 
 
   return (
-    <div className='grid sm:grid-cols-3 gap-3 md:gap-5'>
-      <Card>
-        <CardHeader>
-          <div className='text-center flex flex-col gap-2'>
-            <CardTitle>
-              <h2>{allParcels.length}+</h2>
-            </CardTitle>
-            <p>
-              <CardDescription>Booked Parcels</CardDescription>
-            </p>
-          </div>
-        </CardHeader>
-      </Card>
+    <div className='bg-[#fc0] py-8'>
+      <div className="container grid sm:grid-cols-3 gap-3 md:gap-5">
+        <StatisticsCard number={allParcels.length} text="Booked Parcels"/>
+        <StatisticsCard number={deliveredParcels.length} text="Deliverd Parcels"/>
+        <StatisticsCard number={allUsers.length} text="Registered Users"/>
+      </div>
 
-      <Card>
-        <CardHeader>
-          <div className='text-center flex flex-col gap-2'>
-            <CardTitle>
-              <h2>{deliveredParcels.length}+</h2>
-            </CardTitle>
-            <p>
-              <CardDescription>Delivered Parcels</CardDescription>
-            </p>
-          </div>
-        </CardHeader>
-      </Card>
-
-      <Card>
-        <CardHeader>
-          <div className='text-center flex flex-col gap-2'>
-            <CardTitle>
-              <h2>{allUsers.length}+</h2>
-            </CardTitle>
-            <p>
-              <CardDescription>Registered Users</CardDescription>
-            </p>
-          </div>
-        </CardHeader>
-      </Card>
     </div>
   )
 }
