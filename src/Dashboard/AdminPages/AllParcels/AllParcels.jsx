@@ -124,7 +124,7 @@ const AllParcels = () => {
                       <TableCell>{phoneNumber && phoneNumber}</TableCell>
                       <TableCell>{price && price}</TableCell>
                       <TableCell>{deliveryDate && deliveryDate}</TableCell>
-                      <TableCell>{bookingDate && bookingDate}</TableCell>
+                      <TableCell>{bookingDate && new Date(bookingDate).toLocaleDateString()}</TableCell>
                       <TableCell>{status && status}</TableCell>
                       <TableCell>
                         <Button onClick={() => handleOpenModal(_id)}>Manage</Button>
