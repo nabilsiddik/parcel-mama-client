@@ -2,6 +2,16 @@ import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import React from "react";
 
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table"
+import { Button } from "@/Components/ui/button";
+
 const AllDeliveryMan = () => {
   const {
     data: deliveryMens = [],
@@ -19,42 +29,39 @@ const AllDeliveryMan = () => {
   });
 
   return (
-    <div>
-      <h2>All Delivery Man</h2>
-      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
-        {deliveryMens &&
-          deliveryMens.map((deliveryMan) => {
-            const {
-              _id,
-              name,
-              email,
-              image,
-              role,
-              timeStamp,
-              phone,
-              totalSpent,
-              bookedParcel,
-            } = deliveryMan;
+    <div id="all_deliveryman" className="py-8">
+      <h3 className="mb-3">All Users</h3>
+      <div className="rounded-md border">
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead>Name</TableHead>
+              <TableHead>Phone Number</TableHead>
+              <TableHead>Parcels Dleivered</TableHead>
+              <TableHead>Average Review</TableHead>
+            </TableRow>
+          </TableHeader>
 
-            return (
-              <div key={_id} className="shadow-lg border p-5">
-                <h3>
-                  <b>Name: </b>
-                  {name && name}
-                </h3>
-                <p>
-                  <b>Phone Number:</b> {phone && phone}
-                </p>
-                <p>
-                  <b>Parcels Dleivered:</b> 
-                </p>
-                <p>
-                  <b>Average Review:</b> 
-                </p>
-
-              </div>
-            );
-          })}
+          <TableBody>
+            {deliveryMens &&
+              deliveryMens.map((deliveryMan) => {
+                const {
+                  _id,
+                  name,
+                  numOfDeliveredParcel,
+                  phone,
+                } = deliveryMan;
+                return (
+                  <TableRow>
+                    <TableCell>{name && name}</TableCell>
+                    <TableCell>{phone && phone}</TableCell>
+                    <TableCell>{numOfDeliveredParcel && numOfDeliveredParcel}</TableCell>
+                    <TableCell>Review</TableCell>
+                  </TableRow>
+                )
+              })}
+          </TableBody>
+        </Table>
       </div>
     </div>
   );

@@ -1,13 +1,40 @@
+import { authContext } from '@/Contexts/AuthContext/AuthContext';
 import SideMenu from '@/Layouts/SideMenu';
-import React from 'react'
+import React, { useContext } from 'react'
 import { useState } from "react";
 import { FaBars } from "react-icons/fa";
 import { NavLink, Outlet } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 
 
 const DashboardHome = () => {
     const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+    const { userSignOut } = useContext(authContext)
+
+
+    const handleLogout = () => {
+        const swalWithBootstrapButtons = Swal.mixin({
+            customClass: {
+                confirmButton: "btn btn-success",
+                cancelButton: "btn btn-danger"
+            },
+            buttonsStyling: false
+        });
+        swalWithBootstrapButtons.fire({
+            title: "Are you sure?",
+            text: "You want to log out?",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonText: "Yes",
+            cancelButtonText: "No",
+            reverseButtons: true
+        }).then(async (result) => {
+            if (result.isConfirmed) {
+                userSignOut()
+            }
+        });
+    }
 
     return (
         <div className="flex h-screen bg-gray-100">
@@ -40,7 +67,7 @@ const DashboardHome = () => {
                     </div>
                     <nav className='p-4'>
                         <ul>
-                            <NavLink className={"font-bold text-black"} to={"my-profile"}>
+                            <NavLink onClick={handleLogout} className={"font-bold text-black"}>
                                 Logout
                             </NavLink>
                         </ul>

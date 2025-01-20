@@ -3,6 +3,16 @@ import axios from "axios";
 import React from "react";
 import Swal from "sweetalert2";
 
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table"
+import { Button } from "@/Components/ui/button";
+
 const AllUsers = () => {
   const {
     data: allUsers = [],
@@ -36,7 +46,7 @@ const AllUsers = () => {
       confirmButtonText: "Yes",
       cancelButtonText: "No",
       reverseButtons: true
-    }).then(async(result) => {
+    }).then(async (result) => {
       if (result.isConfirmed) {
         swalWithBootstrapButtons.fire({
           title: "Admin Done!",
@@ -76,7 +86,7 @@ const AllUsers = () => {
       confirmButtonText: "Yes",
       cancelButtonText: "No",
       reverseButtons: true
-    }).then(async(result) => {
+    }).then(async (result) => {
       if (result.isConfirmed) {
         swalWithBootstrapButtons.fire({
           title: "Delivery Man Done!",
@@ -101,34 +111,42 @@ const AllUsers = () => {
   }
 
   return (
-    <div>
-      <h2>All Users</h2>
-      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
-        {allUsers &&
-          allUsers.map((user) => {
-            const { _id, name, email, image, role, timeStamp, phone, totalSpent, bookedParcel} = user;
+    <div className="py-8">
+      <h3 className="mb-3">All Users</h3>
+      <div className="rounded-md border">
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead>Name</TableHead>
+              <TableHead>Phone</TableHead>
+              <TableHead>Parcels Booked</TableHead>
+              <TableHead>Total Spent</TableHead>
+              <TableHead>Action</TableHead>
+              <TableHead>Action</TableHead>
+            </TableRow>
+          </TableHeader>
 
-            return (
-              <div key={user._id} className="shadow-lg border p-5">
-                <h3>
-                  <b>Name: </b>
-                  {name && name}
-                </h3>
-                <p>
-                  <b>Phone Number:</b> {phone && phone}
-                </p>
-                <p>
-                  <b>Parcels Booked:</b> {bookedParcel && bookedParcel}
-                </p>
-                <p>
-                  <b>Total Spent:</b> {totalSpent && totalSpent}
-                </p>
-
-                <button onClick={() => handleMakeAdmin(_id)} className="btn bg-secondary w-full mt-2 text-white">Make Admin</button>
-                <button onClick={() => handleMakeDeliveryMan(_id)} className="btn bg-secondary w-full mt-2 text-white">Make Delivery Man</button>
-              </div>
-            );
-          })}
+          <TableBody>
+            {allUsers &&
+              allUsers.map((user) => {
+                const { _id, name, email, image, role, timeStamp, phone, totalSpent, bookedParcel } = user;
+                return (
+                  <TableRow key={user._id}>
+                    <TableCell>{name && name}</TableCell>
+                    <TableCell>{phone && phone}</TableCell>
+                    <TableCell>{bookedParcel && bookedParcel}</TableCell>
+                    <TableCell>BDT {totalSpent && totalSpent}</TableCell>
+                    <TableCell>
+                      <Button onClick={() => handleMakeAdmin(_id)}>Make Admin</Button>
+                    </TableCell>
+                    <TableCell>
+                      <Button onClick={() => handleMakeDeliveryMan(_id)}>Make Delivery Man</Button>
+                    </TableCell>
+                  </TableRow>
+                )
+              })}
+          </TableBody>
+        </Table>
       </div>
     </div>
   );

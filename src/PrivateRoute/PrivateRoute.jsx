@@ -4,9 +4,9 @@ import { Navigate } from 'react-router-dom'
 
 const PrivateRoute = ({children}) => {
 
-    const {user, isLoading} = useContext(authContext)
+    const {user, loading} = useContext(authContext)
 
-    if(isLoading){
+    if(loading){
         return <h1>Loading ...</h1>
     }
 

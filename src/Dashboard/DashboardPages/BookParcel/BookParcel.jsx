@@ -2,6 +2,16 @@ import axios from "axios";
 import React, { useContext } from "react";
 import { authContext } from "../../../Contexts/AuthContext/AuthContext";
 import Swal from "sweetalert2";
+import {
+  Card,
+  CardContent,
+} from "@/components/ui/card"
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
+import { Button } from "@/components/ui/button"
+import parcelBooking from "../../../assets/parcel-booking.png"
+
+
 
 const BookParcel = () => {
   const { user } = useContext(authContext);
@@ -68,109 +78,112 @@ const BookParcel = () => {
   };
 
   return (
-    <div>
-      <h1>Book Parcel</h1>
+    <div className="py-8">
+      <h2 className="mb-5 text-center">Book Parcel</h2>
 
-      <form onSubmit={handleAddParcel} className="w-11/12 md:w-8/12 lg:w-6/12">
-        <div className="input-group mb-3">
-          <label className="label">Phone Number</label>
-          <input
-            name="phoneNumber"
-            type="tel"
-            placeholder="Phone Number"
-            className="input input-bordered w-full"
-          />
+      <div className="xl:flex items-stretch gap-5">
+        <div className="w-1/2 border flex items-center hidden xl:block">
+          <img className="" src={parcelBooking} alt="delivery man with parcel" />
         </div>
+        <form className="xl:w-1/2 border p-10" onSubmit={handleAddParcel}>
+          <div className="mb-4 flex items-center gap-5">
+            <div className="w-1/2">
+              <Label htmlFor="phoneNumber">Phone Number</Label>
+              <Input
+                id="phoneNumber"
+                name="phoneNumber"
+                type="tel"
+                placeholder="Phone Number"
+              />
+            </div>
+            <div className="w-1/2">
+              <Label htmlFor="parcelType">Parcel Type</Label>
+              <Input
+                id="parcelType"
+                name="parcelType"
+                type="text"
+                placeholder="Parcel Type"
+              />
+            </div>
+          </div>
 
-        <div className="input-group mb-3">
-          <label className="label">Parcel Type</label>
-          <input
-            name="parcelType"
-            type="text"
-            placeholder="Parcel Type"
-            className="input input-bordered w-full"
-          />
-        </div>
+          <div className="mb-4 flex items-center gap-5">
+            <div className="w-1/2">
+              <Label htmlFor="parcelWeight">Parcel Weight</Label>
+              <Input
+                id="parcelWeight"
+                name="parcelWeight"
+                type="number"
+                placeholder="Parcel Weight"
+              />
+            </div>
+            <div className="w-1/2">
+              <Label htmlFor="receiverName">Receiver's Name</Label>
+              <Input
+                id="receiverName"
+                name="receiverName"
+                type="text"
+                placeholder="Receiver's Name"
+              />
+            </div>
+          </div>
 
-        <div className="input-group mb-3">
-          <label className="label">Parcel Weight</label>
-          <input
-            name="parcelWeight"
-            type="number"
-            placeholder="Parcel Weight"
-            className="input input-bordered w-full"
-          />
-        </div>
+          <div className="mb-4 flex items-center gap-5">
+            <div className="w-1/2">
+              <Label htmlFor="receiverPhoneNumber">Receiver's Phone Number</Label>
+              <Input
+                id="receiverPhoneNumber"
+                name="receiverPhoneNumber"
+                type="tel"
+                placeholder="Receiver's Phone Number"
+              />
+            </div>
+            <div className="w-1/2">
+              <Label htmlFor="deliveryDate">Requested Delivery Date</Label>
+              <Input id="deliveryDate" name="deliveryDate" type="date" />
+            </div>
+          </div>
 
-        <div className="input-group mb-3">
-          <label className="label">Receiver's Name</label>
-          <input
-            name="receiverName"
-            type="text"
-            placeholder="Receiver's Name"
-            className="input input-bordered w-full"
-          />
-        </div>
+          <div className="mb-4">
+            <Label htmlFor="deliveryAddress">Parcel Delivery Address</Label>
+            <Input
+              id="deliveryAddress"
+              name="deliveryAddress"
+              type="text"
+              placeholder="Delivery Address"
+            />
+          </div>
 
-        <div className="input-group mb-3">
-          <label className="label">Receiver's Phone Number</label>
-          <input
-            name="receiverPhoneNumber"
-            type="tel"
-            placeholder="Receiver's Phone Number"
-            className="input input-bordered w-full"
-          />
-        </div>
+          <div className="mb-4 flex items-center gap-5">
+            <div className="w-1/2">
+              <Label htmlFor="latitude">Delivery Address Latitude</Label>
+              <Input
+                id="latitude"
+                name="latitude"
+                type="number"
+                step="any"
+                placeholder="e.g., 21.121365496"
+              />
+            </div>
+            <div className="w-1/2">
+              <Label htmlFor="longitude">Delivery Address Longitude</Label>
+              <Input
+                id="longitude"
+                name="longitude"
+                type="number"
+                step="any"
+                placeholder="e.g., 21.121365496"
+              />
+            </div>
+          </div>
 
-        <div className="input-group mb-3">
-          <label className="label">Parcel Delivery Address</label>
-          <input
-            name="deliveryAddress"
-            type="text"
-            placeholder="Delivery Address"
-            className="input input-bordered w-full"
-          />
-        </div>
 
-        <div className="input-group mb-3">
-          <label className="label">Requested Delivery Date</label>
-          <input
-            name="deliveryDate"
-            type="date"
-            className="input input-bordered w-full"
-          />
-        </div>
 
-        <div className="input-group mb-3">
-          <label className="label">Delivery Address Latitude</label>
-          <input
-            name="latitude"
-            type="number"
-            step="any"
-            placeholder="e.g., 21.121365496"
-            className="input input-bordered w-full"
-          />
-        </div>
-
-        <div className="input-group mb-3">
-          <label className="label">Delivery Address Longitude</label>
-          <input
-            name="longitude"
-            type="number"
-            step="any"
-            placeholder="e.g., 21.121365496"
-            className="input input-bordered w-full"
-          />
-        </div>
-
-        <div>
-          <input
-            className="btn w-full bg-purple-600 text-white font-bold"
-            type="submit"
-            value={"Book Parcel"}
-          />
-        </div>
-      </form>
+          <Button type="submit" className="w-full bg-purple-600 text-white font-bold">
+            Book Parcel
+          </Button>
+        </form>
+      </div>
     </div>
   );
 };
