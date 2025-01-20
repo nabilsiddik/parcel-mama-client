@@ -3,6 +3,16 @@ import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
 import { authContext } from "../../../Contexts/AuthContext/AuthContext";
 import Swal from "sweetalert2";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table"
+import { Button } from "@/Components/ui/button";
+
 
 const MyDeliveryList = () => {
   const { user } = useContext(authContext);
@@ -53,20 +63,20 @@ const MyDeliveryList = () => {
       confirmButtonText: "Yes, Cancle It!",
       cancelButtonText: "No Not Cancle!",
       reverseButtons: true
-    }).then(async(result) => {
-      
+    }).then(async (result) => {
+
       if (result.isConfirmed) {
 
         const res = await axios.patch(`${import.meta.env.VITE_MAIN_URL}/cancle-parcel/${_id}`)
 
-        if(res.data.modifiedCount > 0){
+        if (res.data.modifiedCount > 0) {
           refetch()
           swalWithBootstrapButtons.fire({
             title: "Cancled!",
             text: "Parcel Cancled.",
             icon: "error"
           });
-        }else{
+        } else {
           swalWithBootstrapButtons.fire({
             title: "Error",
             text: "Error while canclation",
@@ -74,7 +84,7 @@ const MyDeliveryList = () => {
           });
         }
 
-     
+
       } else if (
         result.dismiss === Swal.DismissReason.cancel
       ) {
@@ -105,15 +115,15 @@ const MyDeliveryList = () => {
       confirmButtonText: "Delever It!",
       cancelButtonText: "Cancle",
       reverseButtons: true
-    }).then(async(result) => {
+    }).then(async (result) => {
       if (result.isConfirmed) {
 
         const res = await axios.patch(`${import.meta.env.VITE_MAIN_URL}/delivered-parcel/${_id}`)
 
         const { parcelResult, deliveryManResult } = res.data
 
-        if(parcelResult?.modifiedCount > 0 &&
-          deliveryManResult?.modifiedCount > 0){
+        if (parcelResult?.modifiedCount > 0 &&
+          deliveryManResult?.modifiedCount > 0) {
 
           refetch()
           swalWithBootstrapButtons.fire({
@@ -121,7 +131,7 @@ const MyDeliveryList = () => {
             text: "Parcel Delivered.",
             icon: "success"
           });
-        }else{
+        } else {
           swalWithBootstrapButtons.fire({
             title: "Error",
             text: "Error while deliver",
@@ -129,7 +139,7 @@ const MyDeliveryList = () => {
           });
         }
 
-     
+
       } else if (
         result.dismiss === Swal.DismissReason.cancel
       ) {
@@ -149,73 +159,72 @@ const MyDeliveryList = () => {
   }
 
   return (
-    <div>
-      <h2>My Delivery List</h2>
+    <div className="py-8">
+      <h3 className="mb-5 ">My Delivery List</h3>
 
-      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
-        {deliveryList?.length > 0 &&
-          deliveryList.map((deliveredParcel) => {
-            const {
-              _id,
-              ObjectId,
-              customer: { name },
-              phoneNumber,
-              parcelType,
-              parcelWeight,
-              receiverName,
-              receiverPhoneNumber,
-              deliveryAddress,
-              deliveryDate,
-              latitude,
-              longitude,
-              price,
-              status,
-              apprDeliDate,
-              bookingDate,
-              deliveryManId,
-            } = deliveredParcel;
+      <div className="rounded-md border">
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead>Booked By</TableHead>
+              <TableHead>Reveiver</TableHead>
+              <TableHead>Booked Users Number</TableHead>
+              <TableHead>Requested Date</TableHead>
+              <TableHead>Approximate Date</TableHead>
+              <TableHead>Receivers phone</TableHead>
+              <TableHead>Receivers Address</TableHead>
+              <TableHead>Action</TableHead>
+            </TableRow>
+          </TableHeader>
 
-            return (
-              <div key={deliveredParcel._id} className="shadow-lg border p-5">
-                <h3>
-                  <b>Booked User’s Name: </b>
-                  {name && name}
-                </h3>
-                <p>
-                  <b>Reveivers Name:</b> {receiverName && receiverName}
-                </p>
-                <p>
-                  <b>Booked Users Number:</b> {phoneNumber && phoneNumber}
-                </p>
-                <p>
-                  <b>Requested Delivery Date:</b> {deliveryDate && deliveryDate}
-                </p>
-                <p>
-                  <b>Approximate Delivery Date:</b>{" "}
-                  {apprDeliDate && apprDeliDate}
-                </p>
-                <p>
-                  <b>Receivers phone number:</b>{" "}
-                  {receiverPhoneNumber && receiverPhoneNumber}
-                </p>
-                <p>
-                  <b>Receivers Address:</b> {deliveryAddress && deliveryAddress}
-                </p>
-
-                <button className="btn mt-3 bg-purple-600 text-white">
-                  View Location
-                </button>
-                <div className="flex items-center justify-between">
-                  <button disabled={status === 'cancled' || status === 'delivered' ? true : false} onClick={() => cancleDelivery(_id)} className="btn mt-3 bg-purple-600 text-white">
-                    Cancle
-                  </button>
-                  <button disabled={status === 'cancled' || status === 'delivered' ? true : false} onClick={() => handleDelivered(_id)} className="btn mt-3 bg-purple-600 text-white">
-                    Deliver
-                  </button>
-                </div>
-              </div>
-            );
-          })}
+          <TableBody>
+            {deliveryList &&
+              deliveryList.map((deliveredParcel) => {
+                const {
+                  _id,
+                  ObjectId,
+                  customer: { name },
+                  phoneNumber,
+                  parcelType,
+                  parcelWeight,
+                  receiverName,
+                  receiverPhoneNumber,
+                  deliveryAddress,
+                  deliveryDate,
+                  latitude,
+                  longitude,
+                  price,
+                  status,
+                  apprDeliDate,
+                  bookingDate,
+                  deliveryManId,
+                } = deliveredParcel;
+                return (
+                  <TableRow>
+                    <TableCell>{name && name}</TableCell>
+                    <TableCell>{receiverName && receiverName}</TableCell>
+                    <TableCell>{phoneNumber && phoneNumber}</TableCell>
+                    <TableCell>{deliveryDate && deliveryDate}</TableCell>
+                    <TableCell>{apprDeliDate && apprDeliDate}</TableCell>
+                    <TableCell>{receiverPhoneNumber && receiverPhoneNumber}</TableCell>
+                    <TableCell>{deliveryAddress && deliveryAddress}</TableCell>
+                    <TableCell>
+                      <div>
+                        
+                      <div className="flex items-center justify-between gap-3">
+                          <Button onClick={() => cancleDelivery(_id)} disabled={status === 'cancled' || status === 'delivered' ? true : false}>Cancel</Button>
+                          <Button onClick={() => handleDelivered(_id)} disabled={status === 'cancled' || status === 'delivered' ? true : false}>Delvere</Button>
+                        </div>
+                        <div className="mt-2">
+                          <Button className='w-full' onClick={() => handleOpenModal(_id)}>View Location</Button>
+                        </div>
+                      </div>
+                    </TableCell>
+                  </TableRow>
+                )
+              })}
+          </TableBody>
+        </Table>
       </div>
     </div>
   );

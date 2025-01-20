@@ -55,6 +55,16 @@ body{
     color: #fff;
 }
 
+#profile_cover{
+    background-image: url('/src/assets/banner-2.jpg');
+    background-position: center top;
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 250px;
+    position: relative;
+    border-radius: 10px;
+}
+
 /* #banner_section .bg-overlay{
     width: 100%;
     height: 100%;

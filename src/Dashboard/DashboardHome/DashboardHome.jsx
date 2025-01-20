@@ -3,10 +3,9 @@ import SideMenu from '@/Layouts/SideMenu';
 import React, { useContext } from 'react'
 import { useState } from "react";
 import { FaBars } from "react-icons/fa";
-import { NavLink, Outlet } from 'react-router-dom';
+import { Link, NavLink, Outlet } from 'react-router-dom';
 import Swal from 'sweetalert2';
-
-
+import logoIcon from '../../assets/delivery.png'
 
 const DashboardHome = () => {
     const [isSidebarOpen, setIsSidebarOpen] = useState(true);
@@ -44,12 +43,7 @@ const DashboardHome = () => {
                     } bg-white border-r border-gray-200 transition-all duration-300`}
             >
                 <div className="flex items-center justify-between p-4 border-b border-gray-200 h-[8%]">
-                    <h1
-                        className={`text-lg font-bold transition-opacity duration-300 ${isSidebarOpen ? "opacity-100" : "opacity-0"
-                            }`}
-                    >
-                        Admin
-                    </h1>
+                    <Link to={'/'}><img className='w-[50px]' src={logoIcon} alt="" /></Link>
                     <button
                         onClick={() => setIsSidebarOpen(!isSidebarOpen)}
                         className="p-2 text-gray-500 hover:text-gray-900"

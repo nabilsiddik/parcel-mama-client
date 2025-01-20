@@ -12,7 +12,7 @@ const SideMenu = () => {
     isLoading,
     refetch,
   } = useQuery({
-    queryKey: ["parcel", user?.email],
+    queryKey: ["user", user?.email],
     queryFn: async () => {
       const { data } = await axios.get(
         `${import.meta.env.VITE_MAIN_URL}/user/${user?.email}`
@@ -26,9 +26,6 @@ const SideMenu = () => {
     <div className="p-4">
       {currentUser?.role === "user" && (
         <ul className="flex flex-col gap-4">
-          <NavLink className={"font-bold text-black"} to={"/dashboard"}>
-            Home
-          </NavLink>
           <NavLink className={"font-bold text-black"} to={"book-parcel"}>
             Book Parcel
           </NavLink>

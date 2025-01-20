@@ -4,6 +4,16 @@ import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table"
+import { Button } from "@/Components/ui/button";
+
 
 const MyParcels = () => {
   const { user } = useContext(authContext);
@@ -40,7 +50,7 @@ const MyParcels = () => {
       confirmButtonText: "Yes, Cancle It!",
       cancelButtonText: "No Not Cancle!",
       reverseButtons: true
-    }).then(async(result) => {
+    }).then(async (result) => {
       if (result.isConfirmed) {
 
         const res = await axios.patch(`${import.meta.env.VITE_MAIN_URL}/cancle-parcel/${_id}`)
@@ -64,77 +74,67 @@ const MyParcels = () => {
     });
   }
 
-  if(isLoading){
+  if (isLoading) {
     return <h1>Loading ...</h1>
   }
 
   return (
     <div>
-      <h1>My Parcels</h1>
-      <div>
-        <div className="overflow-x-auto">
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
-            {parcels && parcels.length > 0 && parcels.map((parcel) => {
-              const {
-                _id,
-                phoneNumber,
-                parcelType,
-                parcelWeight,
-                receiverName,
-                receiverPhoneNumber,
-                deliveryAddress,
-                deliveryDate,
-                latitude,
-                longitude,
-                bookingDate,
-                status,
-                apprDeliDate,
-                deliveryManId,
-              } = parcel;
-              return (
-                <div key={_id} className="shadow-lg border p-5">
-                  <p>
-                    <b>Parcel Type: </b> {parcelType && parcelType}
-                  </p>
-                  <p>
-                    <b>Delivery Address: </b> {deliveryAddress && deliveryAddress}
-                  </p>
-                  <p>
-                    <b>Requested Delivery Date: </b>{" "}
-                    {deliveryDate && deliveryDate}
-                  </p>
-                  <p>
-                    <b>Approximate Delivery Date: </b>
-                    {apprDeliDate && apprDeliDate}
-                  </p>
-                  <p>
-                    <b>Booking Date: </b>
-                    {bookingDate && bookingDate}
-                  </p>
-                  <p>
-                    <b>Delivery Men ID: </b> {deliveryManId && deliveryManId}
-                  </p>
-                  <p>
-                    <b>Booking Status: </b> {status && status}
-                  </p>
-                  <p>
-                    <b>Booking Type: </b>
-                  </p>
-                  <div className="flex items-center justify-between mt-3">
-                    <Link to={`/dashboard/update-parcel/${_id}`}>
-                      <button className="btn bg-success" disabled={status === 'pending'? false : true}>Update</button>
-                    </Link>
-                    <button onClick={() => handleCancleParcel(_id)} className="btn bg-primary" disabled={status === 'pending'? false : true}>Cancle</button>
-                  </div>
-                  <div className="flex items-center justify-between mt-3">
-                    <button className="btn bg-success">Review</button>
-                    <button className="btn bg-primary">Pay</button>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
+      <h3 className="py-8">My Parcels</h3>
+      <div className="rounded-md border">
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead>Parcel Type</TableHead>
+              <TableHead>Delivery Address</TableHead>
+              <TableHead>Requested Date</TableHead>
+              <TableHead>Approximate Date</TableHead>
+              <TableHead>Booking Date</TableHead>
+              <TableHead>Status</TableHead>
+              <TableHead>Type</TableHead>
+              <TableHead>Actions</TableHead>
+            </TableRow>
+          </TableHeader>
+
+          <TableBody>
+            {parcels &&
+              parcels.map((parcel) => {
+                const {
+                  _id,
+                  parcelType,
+                  deliveryAddress,
+                  deliveryDate,
+                  bookingDate,
+                  status,
+                  apprDeliDate
+                } = parcel;
+                return (
+                  <TableRow>
+                    <TableCell>{parcelType && parcelType}</TableCell>
+                    <TableCell>{deliveryAddress && deliveryAddress}</TableCell>
+                    <TableCell>{deliveryDate && deliveryDate}</TableCell>
+                    <TableCell>{apprDeliDate && apprDeliDate}</TableCell>
+                    <TableCell>{bookingDate && bookingDate}</TableCell>
+                    <TableCell>{status && status}</TableCell>
+                    <TableCell>{parcelType && parcelType}</TableCell>
+                    <TableCell>
+                      <div className="flex gap-2 mb-3">
+                        <Link to={status === 'pending' ? `/dashboard/update-parcel/${_id}` : ''}>
+                          <Button disabled={status === 'pending' ? false : true}>Update</Button>
+                        </Link>
+
+                        <Button disabled={status === 'pending'? false : true} onClick={() => handleCancleParcel(_id)}>Cancle</Button>
+                      </div>
+                      <div className="flex gap-2">
+                        <Button>Review</Button>
+                        <Button>Pay</Button>
+                      </div>
+                    </TableCell>
+                  </TableRow>
+                )
+              })}
+          </TableBody>
+        </Table>
       </div>
     </div>
   );

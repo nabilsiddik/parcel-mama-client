@@ -8,7 +8,7 @@ import AuthContextProvider from "./Contexts/AuthContext/AuthContext.jsx";
 import ErrorPage from "./Pages/ErrorPage/ErrorPage.jsx";
 import DashboardLayout from "./Layouts/DashboardLayout.jsx";
 import Welcome from "./Dashboard/DashboardPages/Welcome/Welcome.jsx";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { QueryClient, QueryClientProvider, useQuery } from "@tanstack/react-query";
 import BookParcel from "./Dashboard/DashboardPages/BookParcel/BookParcel.jsx";
 import MyParcels from "./Dashboard/DashboardPages/MyParcels/MyParcels.jsx";
 import UpdateParcel from "./Dashboard/DashboardPages/UpdateParcel/UpdateParcel.jsx";
@@ -24,8 +24,10 @@ import AuthenticationPage from "./Pages/AuthenticationPage/AuthenticationPage";
 import LoginCard from "./Components/LoginCard/LoginCard";
 import RegistrationCard from "./Components/RegistrationCard/RegistrationCard";
 import DashboardHome from "./Dashboard/DashboardHome/DashboardHome";
+import axios from "axios";
 
 const queryClient = new QueryClient();
+
 const route = createBrowserRouter([
   {
     path: "/",
@@ -58,12 +60,6 @@ const route = createBrowserRouter([
       <DashboardHome/>
     </PrivateRoute>,
     children: [
-      {
-        index: true,
-        element: <PrivateRoute>
-        <Welcome />
-      </PrivateRoute>,
-      },
       {
         path: "book-parcel",
         element: <PrivateRoute>
