@@ -24,46 +24,7 @@ const AllParcels = () => {
     },
   });
 
-  //   const handleCancleParcel = (_id) => {
-  //     const swalWithBootstrapButtons = Swal.mixin({
-  //       customClass: {
-  //         confirmButton: "btn btn-success",
-  //         cancelButton: "btn btn-danger",
-  //       },
-  //       buttonsStyling: false,
-  //     });
-  //     swalWithBootstrapButtons
-  //       .fire({
-  //         title: "Are you sure?",
-  //         text: "You want to cancle the parcel?",
-  //         icon: "warning",
-  //         showCancelButton: true,
-  //         confirmButtonText: "Yes, Cancle It!",
-  //         cancelButtonText: "No Not Cancle!",
-  //         reverseButtons: true,
-  //       })
-  //       .then(async (result) => {
-  //         if (result.isConfirmed) {
-  //           const res = await axios.patch(
-  //             `${import.meta.env.VITE_MAIN_URL}/cancle-parcel/${_id}`
-  //           );
 
-  //           swalWithBootstrapButtons.fire({
-  //             title: "Cancled!",
-  //             text: "Your Parcel Is Cancled.",
-  //             icon: "error",
-  //           });
-
-  //           refetch();
-  //         } else if (result.dismiss === Swal.DismissReason.cancel) {
-  //           swalWithBootstrapButtons.fire({
-  //             title: "Thanks",
-  //             text: "Your Parcel is safe",
-  //             icon: "success",
-  //           });
-  //         }
-  //       });
-  //   };
 
 
   const handleOpenModal = (parcelId) => {

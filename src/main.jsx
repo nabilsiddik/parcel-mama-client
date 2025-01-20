@@ -6,8 +6,6 @@ import MainLayout from "./Layouts/MainLayout.jsx";
 import Home from "./Pages/Home/Home.jsx";
 import AuthContextProvider from "./Contexts/AuthContext/AuthContext.jsx";
 import ErrorPage from "./Pages/ErrorPage/ErrorPage.jsx";
-import Login from "./Pages/Login/Login.jsx";
-import Registration from "./Pages/Registration/Registration.jsx";
 import DashboardLayout from "./Layouts/DashboardLayout.jsx";
 import Welcome from "./Dashboard/DashboardPages/Welcome/Welcome.jsx";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
@@ -23,6 +21,9 @@ import MyDeliveryList from "./Dashboard/DeliveryManPages/MyDeliveryList/MyDelive
 import AllReviews from "./Dashboard/DeliveryManPages/AllReviews/AllReviews.jsx";
 import PrivateRoute from "./PrivateRoute/PrivateRoute.jsx";
 import AuthenticationPage from "./Pages/AuthenticationPage/AuthenticationPage";
+import LoginCard from "./Components/LoginCard/LoginCard";
+import RegistrationCard from "./Components/RegistrationCard/RegistrationCard";
+import DashboardHome from "./Dashboard/DashboardHome/DashboardHome";
 
 const queryClient = new QueryClient();
 const route = createBrowserRouter([
@@ -36,23 +37,25 @@ const route = createBrowserRouter([
         element: <Home />,
       },
       {
-        path: "/login",
+        path: "/authentication",
         element: <AuthenticationPage />,
-      },
-      {
-        path: '/log',
-        element: <Login/>
-      },
-      {
-        path: "/registration",
-        element: <Registration />,
+        children: [
+          {
+            path: 'login',
+            element: <LoginCard/>
+          },
+          {
+            path: "registration",
+            element: <RegistrationCard />,
+          },
+        ]
       },
     ],
   },
   {
     path: "/dashboard",
     element: <PrivateRoute>
-      <DashboardLayout />
+      <DashboardHome/>
     </PrivateRoute>,
     children: [
       {

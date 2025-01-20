@@ -1,11 +1,7 @@
 import React, { useContext } from 'react'
 import {
-    Card,
     CardContent,
-    CardDescription,
     CardFooter,
-    CardHeader,
-    CardTitle,
 } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
@@ -57,7 +53,7 @@ const LoginCard = () => {
             </CardContent>
             <CardFooter className="text-center text-sm text-gray-500 block">
                 <label className="label block">
-                    <span href="#" className="label-text-alt">Don't have an account? <Link to={'/registration'} className='underline'>Register Now</Link></span>
+                    <span href="#" className="label-text-alt">Don't have an account? <Link to={'/authentication/registration'} className='underline'>Register Now</Link></span>
                 </label>
             </CardFooter>
         </div>

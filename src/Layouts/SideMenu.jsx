@@ -25,45 +25,45 @@ const SideMenu = () => {
   return (
     <div className="p-4">
       {currentUser?.role === "user" && (
-        <ul className="flex flex-col gap-2">
-          <NavLink className={"font-bold text-white"} to={"/dashboard"}>
+        <ul className="flex flex-col gap-4">
+          <NavLink className={"font-bold text-black"} to={"/dashboard"}>
             Home
           </NavLink>
-          <NavLink className={"font-bold text-white"} to={"book-parcel"}>
+          <NavLink className={"font-bold text-black"} to={"book-parcel"}>
             Book Parcel
           </NavLink>
-          <NavLink className={"font-bold text-white"} to={"my-parcels"}>
+          <NavLink className={"font-bold text-black"} to={"my-parcels"}>
             My Parcels
           </NavLink>
-          <NavLink className={"font-bold text-white"} to={"my-profile"}>
+          <NavLink className={"font-bold text-black"} to={"my-profile"}>
             My Profile
           </NavLink>
         </ul>
       )}
 
       {currentUser?.role === "admin" && (
-        <ul className="flex flex-col gap-2">
-          <NavLink className={"font-bold text-white"} to={"statistics"}>
+        <ul className="flex flex-col gap-4">
+          <NavLink className={"font-bold text-black"} to={"statistics"}>
             Statistics
           </NavLink>
-          <NavLink className={"font-bold text-white"} to={"all-parcels"}>
+          <NavLink className={"font-bold text-black"} to={"all-parcels"}>
             All Parcels
           </NavLink>
-          <NavLink className={"font-bold text-white"} to={"all-delivery-man"}>
+          <NavLink className={"font-bold text-black"} to={"all-delivery-man"}>
             All Delevery Men
           </NavLink>
-          <NavLink className={"font-bold text-white"} to={"all-users"}>
+          <NavLink className={"font-bold text-black"} to={"all-users"}>
             All Users
           </NavLink>
         </ul>
       )}
 
       {currentUser?.role === "deliveryman" && (
-        <ul className="flex flex-col gap-2">
-          <NavLink className={"font-bold text-white"} to={"my-delivery-list"}>
+        <ul className="flex flex-col gap-4">
+          <NavLink className={"font-bold text-black"} to={"my-delivery-list"}>
             My Delivery List
           </NavLink>
-          <NavLink className={"font-bold text-white"} to={"all-reviews"}>
+          <NavLink className={"font-bold text-black"} to={"all-reviews"}>
             All Reviews
           </NavLink>
         </ul>

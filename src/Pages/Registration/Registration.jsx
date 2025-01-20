@@ -6,6 +6,7 @@ import axios from "axios";
 import Swal from "sweetalert2";
 import { imageUpload } from "../../api/utils";
 
+
 const Registration = () => {
   const { createUser, signInWithGoogle } = useContext(authContext);
 

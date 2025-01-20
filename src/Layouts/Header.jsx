@@ -79,7 +79,7 @@ const Header = () => {
                                 </div>
                             </div>
                             :
-                            <Link to={'/login'}><button className='btn'>Sign In</button></Link>
+                            <Link to={'/authentication/login'}><button className='btn'>Sign In</button></Link>
                         }
 
                         <div className="dark_light_mode flex items-center gap-3 text-3xl ml-5">
