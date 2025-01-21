@@ -48,8 +48,6 @@ const AllParcels = () => {
     const dateFrom = new Date(form.dateFrom.value)
     const dateTo = new Date(form.dateTo.value)
 
-    console.log({ dateFrom, dateTo })
-
     try {
       const { data } = await axios.get(
         `${import.meta.env.VITE_MAIN_URL}/search-parcels`,
@@ -107,8 +105,7 @@ const AllParcels = () => {
             </TableHeader>
 
             <TableBody>
-              {allParcels &&
-                allParcels.map((parcel) => {
+              {(filteredParcels.length > 0 ? filteredParcels : allParcels).map((parcel) => {
                   const {
                     _id,
                     price,
@@ -119,11 +116,11 @@ const AllParcels = () => {
                     customer: { name },
                   } = parcel;
                   return (
-                    <TableRow>
+                    <TableRow key={_id}>
                       <TableCell>{name && name}</TableCell>
                       <TableCell>{phoneNumber && phoneNumber}</TableCell>
                       <TableCell>{price && price}</TableCell>
-                      <TableCell>{deliveryDate && deliveryDate}</TableCell>
+                      <TableCell>{deliveryDate && new Date(deliveryDate).toLocaleDateString()}</TableCell>
                       <TableCell>{bookingDate && new Date(bookingDate).toLocaleDateString()}</TableCell>
                       <TableCell>{status && status}</TableCell>
                       <TableCell>

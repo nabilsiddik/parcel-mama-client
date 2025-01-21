@@ -26,7 +26,7 @@ const BookParcel = () => {
     const receiverName = form.receiverName.value;
     const receiverPhoneNumber = form.receiverPhoneNumber.value;
     const deliveryAddress = form.deliveryAddress.value;
-    const deliveryDate = form.deliveryDate.value;
+    const deliveryDate = new Date(form.deliveryDate.value);
     const latitude = form.latitude.value;
     const longitude = form.longitude.value;
 

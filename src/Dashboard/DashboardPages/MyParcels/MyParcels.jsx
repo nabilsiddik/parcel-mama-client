@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { authContext } from "../../../Contexts/AuthContext/AuthContext";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
@@ -13,10 +13,13 @@ import {
   TableRow,
 } from "@/components/ui/table"
 import { Button } from "@/Components/ui/button";
+import ReviewModal from "@/Modals/ReviewModal/ReviewModal";
 
 
 const MyParcels = () => {
   const { user } = useContext(authContext);
+  const [isOpen, setIsOpen] = useState(false)
+  const [parcelId, setParcelId] = useState(null)
 
   const {
     data: parcels = [],
@@ -31,7 +34,7 @@ const MyParcels = () => {
 
       return data;
     },
-  });
+  })
 
 
   const handleCancleParcel = (_id) => {
@@ -74,6 +77,14 @@ const MyParcels = () => {
     });
   }
 
+
+  // Give Review to Deliveryman after successfully delivered the parcel
+  const handleReview = (_id) => {
+    setParcelId(_id)
+    setIsOpen(true)
+  }
+  
+
   if (isLoading) {
     return <h1>Loading ...</h1>
   }
@@ -81,6 +92,7 @@ const MyParcels = () => {
   return (
     <div>
       <h3 className="py-8">My Parcels</h3>
+      <ReviewModal isOpen={isOpen} setIsOpen={setIsOpen} parcelId = {parcelId}/>
       <div className="rounded-md border">
         <Table>
           <TableHeader>
@@ -109,7 +121,7 @@ const MyParcels = () => {
                   apprDeliDate
                 } = parcel;
                 return (
-                  <TableRow>
+                  <TableRow key={_id}>
                     <TableCell>{parcelType && parcelType}</TableCell>
                     <TableCell>{deliveryAddress && deliveryAddress}</TableCell>
                     <TableCell>{deliveryDate && deliveryDate}</TableCell>
@@ -126,7 +138,7 @@ const MyParcels = () => {
                         <Button disabled={status === 'pending'? false : true} onClick={() => handleCancleParcel(_id)}>Cancle</Button>
                       </div>
                       <div className="flex gap-2">
-                        <Button>Review</Button>
+                        <Button onClick = {() => handleReview(_id)}>Review</Button>
                         <Button>Pay</Button>
                       </div>
                     </TableCell>
