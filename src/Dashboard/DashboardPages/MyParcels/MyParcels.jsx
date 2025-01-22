@@ -139,7 +139,9 @@ const MyParcels = () => {
                       </div>
                       <div className="flex gap-2">
                         <Button onClick = {() => handleReview(_id)}>Review</Button>
-                        <Button>Pay</Button>
+                        <Link to={`/dashboard/checkout/${_id}`}>
+                          <Button>Pay</Button>
+                        </Link>
                       </div>
                     </TableCell>
                   </TableRow>
