@@ -3,6 +3,8 @@ import { CardElement, Elements, useElements, useStripe } from '@stripe/react-str
 import axios from 'axios';
 import clsx from 'clsx';
 import React, { useContext, useEffect, useState } from 'react'
+import Swal from 'sweetalert2';
+import stripeLogo from '../../assets/Stripe.png'
 
 const CheckoutForm = ({ parcelId }) => {
     const [error, setError] = useState('')
@@ -11,6 +13,7 @@ const CheckoutForm = ({ parcelId }) => {
     const { user } = useContext(authContext)
     const [totalPrice, setTotalPrice] = useState(null)
     const [clientSecret, setClientSecret] = useState("")
+    const [transactionId, setTransactionId] = useState('')
 
 
     useEffect(() => {
@@ -36,7 +39,7 @@ const CheckoutForm = ({ parcelId }) => {
         }
     }, [user?.email, totalPrice]);
 
-    
+
     console.log(clientSecret)
 
     const handleSubmit = async (event) => {
@@ -70,11 +73,67 @@ const CheckoutForm = ({ parcelId }) => {
             console.log('[PaymentMethod]', paymentMethod);
             setError('')
         }
+
+        // confirm paypment
+        const { paymentIntent, error: confirmError } = await stripe.confirmCardPayment(clientSecret, {
+            payment_method: {
+                card: card,
+                billing_details: {
+                    email: user?.email || 'anonymous',
+                    name: user?.displayName || 'anonymous'
+                }
+            }
+
+        })
+
+        if (confirmError) {
+            console.log('confirm error')
+        } else {
+            if (paymentIntent.status === 'succeeded') {
+                console.log('Transaction id', paymentIntent.id)
+                setTransactionId(paymentIntent.id)
+
+                // Now save the payment in the database
+                const payment = {
+                    email: user?.email,
+                    name: user?.displayName,
+                    image: user?.photoURL,
+                    price: totalPrice,
+                    transactionId: paymentIntent.id,
+                    date: new Date(),
+                    parcelId: parcelId
+                }
+
+                const paymentResponse = await axios.post(`${import.meta.env.VITE_MAIN_URL}/payments`, payment)
+
+                if (paymentResponse.data.insertedId) {
+                    Swal.fire({
+                        position: "center center",
+                        icon: "success",
+                        title: "Payment Successfull",
+                        showConfirmButton: false,
+                        timer: 1500,
+                    });
+                } else {
+                    Swal.fire({
+                        icon: "error",
+                        title: "Oops! Payment Failed",
+                        text: "Something went wrong while payment",
+                        footer: `${error.code}. ${error.message}`,
+                    });
+                }
+
+            }
+        }
     };
 
     return (
         <div>
-            <form onSubmit={handleSubmit}>
+            <form id='stripe_payment_form' onSubmit={handleSubmit} className='w-11/12 md:w-8/12 lg:w-6/12 xl:w-4/12 border mx-auto py-10 px-5 md:px-7 lg:px-20 shadow-lg rounded-lg'>
+                <div>
+                    <img className='mx-auto mb-3 w-40' src={stripeLogo} alt="stripe logo" />
+                    <h3 className='mb-6 text-center'>Enter Your Payment Info</h3>
+                </div>
                 <CardElement
                     options={{
                         style: {
@@ -84,6 +143,8 @@ const CheckoutForm = ({ parcelId }) => {
                                 '::placeholder': {
                                     color: '#aab7c4',
                                 },
+                                border: '1px solid black',
+
                             },
                             invalid: {
                                 color: '#9e2146',
@@ -91,11 +152,12 @@ const CheckoutForm = ({ parcelId }) => {
                         },
                     }}
                 />
-                <button type="submit" disabled={!stripe || !clientSecret}>
+                <button className='btn bg-black w-full mt-8 mb-5 text-white' type="submit" disabled={!stripe || !clientSecret}>
                     Pay
                 </button>
 
                 <p className='text-red-600 font-bold'>{error}</p>
+                {transactionId && <p className='text-green-600 font-bold'>Your Transaction ID: {transactionId && transactionId}</p>}
             </form>
         </div>
     )
