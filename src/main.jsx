@@ -26,6 +26,7 @@ import RegistrationCard from "./Components/RegistrationCard/RegistrationCard";
 import DashboardHome from "./Dashboard/DashboardHome/DashboardHome";
 import axios from "axios";
 import Checkout from "./Dashboard/DashboardPages/Checkout/Checkout";
+import PaymentSuccess from "./Dashboard/DashboardPages/PaymentSuccess/PaymentSuccess";
 
 const queryClient = new QueryClient();
 
@@ -125,6 +126,12 @@ const route = createBrowserRouter([
         path: 'checkout/:parcelId',
         element: <PrivateRoute>
           <Checkout/>
+        </PrivateRoute>
+      },
+      {
+        path: 'payment-success/:transactionId',
+        element: <PrivateRoute>
+          <PaymentSuccess/>
         </PrivateRoute>
       }
     ],

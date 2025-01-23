@@ -5,6 +5,7 @@ import clsx from 'clsx';
 import React, { useContext, useEffect, useState } from 'react'
 import Swal from 'sweetalert2';
 import stripeLogo from '../../assets/Stripe.png'
+import { useNavigate } from 'react-router-dom';
 
 const CheckoutForm = ({ parcelId }) => {
     const [error, setError] = useState('')
@@ -14,6 +15,7 @@ const CheckoutForm = ({ parcelId }) => {
     const [totalPrice, setTotalPrice] = useState(null)
     const [clientSecret, setClientSecret] = useState("")
     const [transactionId, setTransactionId] = useState('')
+    const navigate = useNavigate()
 
 
     useEffect(() => {
@@ -90,9 +92,6 @@ const CheckoutForm = ({ parcelId }) => {
             console.log('confirm error')
         } else {
             if (paymentIntent.status === 'succeeded') {
-                console.log('Transaction id', paymentIntent.id)
-                setTransactionId(paymentIntent.id)
-
                 // Now save the payment in the database
                 const payment = {
                     email: user?.email,
@@ -114,6 +113,9 @@ const CheckoutForm = ({ parcelId }) => {
                         showConfirmButton: false,
                         timer: 1500,
                     });
+                    setTransactionId(paymentIntent.id)
+                    navigate(`/dashboard/payment-success/${paymentIntent?.id && paymentIntent?.id}`)
+                    
                 } else {
                     Swal.fire({
                         icon: "error",
@@ -153,7 +155,7 @@ const CheckoutForm = ({ parcelId }) => {
                     }}
                 />
                 <button className='btn bg-black w-full mt-8 mb-5 text-white' type="submit" disabled={!stripe || !clientSecret}>
-                    Pay
+                    Pay (BDT {totalPrice})
                 </button>
 
                 <p className='text-red-600 font-bold'>{error}</p>
