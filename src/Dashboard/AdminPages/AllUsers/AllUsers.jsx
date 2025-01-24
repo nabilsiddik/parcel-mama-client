@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
-import React from "react";
+import React, { useContext } from "react";
 import Swal from "sweetalert2";
 
 import {
@@ -12,8 +12,13 @@ import {
   TableRow,
 } from "@/components/ui/table"
 import { Button } from "@/Components/ui/button";
+import { authContext } from "@/Contexts/AuthContext/AuthContext";
+import useAxiosSecure from "@/CustomHooks/useAxiosSecure";
 
 const AllUsers = () => {
+
+  const axiosSecure = useAxiosSecure()
+
   const {
     data: allUsers = [],
     isLoading,
@@ -21,13 +26,10 @@ const AllUsers = () => {
   } = useQuery({
     queryKey: ["users"],
     queryFn: async () => {
-      const { data } = await axios.get(
-        `${import.meta.env.VITE_MAIN_URL}/users`
-      );
-
+      const { data } = await axiosSecure.get('/users')
       return data;
     },
-  })
+  });
 
 
   const handleMakeAdmin = (_id) => {

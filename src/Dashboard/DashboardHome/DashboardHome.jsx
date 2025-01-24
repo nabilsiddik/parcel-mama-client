@@ -6,8 +6,10 @@ import { FaBars } from "react-icons/fa";
 import { Link, NavLink, Outlet } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import logoIcon from '../../assets/delivery.png'
+import useAdmin from '@/CustomHooks/useAdmin';
 
 const DashboardHome = () => {
+    const [isAdmin] = useAdmin()
     const [isSidebarOpen, setIsSidebarOpen] = useState(true);
     const { userSignOut } = useContext(authContext)
 

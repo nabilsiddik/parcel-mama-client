@@ -27,6 +27,7 @@ import DashboardHome from "./Dashboard/DashboardHome/DashboardHome";
 import axios from "axios";
 import Checkout from "./Dashboard/DashboardPages/Checkout/Checkout";
 import PaymentSuccess from "./Dashboard/DashboardPages/PaymentSuccess/PaymentSuccess";
+import UserContextProvider from "./Contexts/UserContext/UserContext";
 
 const queryClient = new QueryClient();
 
@@ -46,7 +47,7 @@ const route = createBrowserRouter([
         children: [
           {
             path: 'login',
-            element: <LoginCard/>
+            element: <LoginCard />
           },
           {
             path: "registration",
@@ -59,79 +60,79 @@ const route = createBrowserRouter([
   {
     path: "/dashboard",
     element: <PrivateRoute>
-      <DashboardHome/>
+      <DashboardHome />
     </PrivateRoute>,
     children: [
       {
         path: "book-parcel",
         element: <PrivateRoute>
-        <BookParcel />
-      </PrivateRoute>,
+          <BookParcel />
+        </PrivateRoute>,
       },
       {
         path: "my-parcels",
         element: <PrivateRoute>
-        <MyParcels />
-      </PrivateRoute>,
+          <MyParcels />
+        </PrivateRoute>,
       },
       {
         path: "update-parcel/:id",
         element: <PrivateRoute>
-        <UpdateParcel />
-      </PrivateRoute>,
+          <UpdateParcel />
+        </PrivateRoute>,
       },
       {
         path: "my-profile",
         element: <PrivateRoute>
-        <MyProfile />
-      </PrivateRoute>,
+          <MyProfile />
+        </PrivateRoute>,
       },
       {
         path: "statistics",
         element: <PrivateRoute>
-        <Statistics />
-      </PrivateRoute>,
+          <Statistics />
+        </PrivateRoute>,
       },
       {
         path: "all-parcels",
         element: <PrivateRoute>
-        <AllParcels />
-      </PrivateRoute>,
+          <AllParcels />
+        </PrivateRoute>,
       },
       {
         path: 'all-users',
         element: <PrivateRoute>
-        <AllUsers/>
-      </PrivateRoute>
+          <AllUsers />
+        </PrivateRoute>
       },
       {
         path: 'all-delivery-man',
         element: <PrivateRoute>
-        <AllDeliveryMan/>
-      </PrivateRoute>
+          <AllDeliveryMan />
+        </PrivateRoute>
       },
       {
         path: 'my-delivery-list',
         element: <PrivateRoute>
-        <MyDeliveryList/>
-      </PrivateRoute>
+          <MyDeliveryList />
+        </PrivateRoute>
       },
       {
         path: 'all-reviews',
         element: <PrivateRoute>
-        <AllReviews/>
-      </PrivateRoute>
+          <AllReviews />
+        </PrivateRoute>
       },
       {
         path: 'checkout/:parcelId',
         element: <PrivateRoute>
-          <Checkout/>
+          <Checkout />
         </PrivateRoute>
       },
       {
         path: 'payment-success/:transactionId',
         element: <PrivateRoute>
-          <PaymentSuccess/>
+          <PaymentSuccess />
         </PrivateRoute>
       }
     ],
@@ -140,7 +141,7 @@ const route = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <QueryClientProvider client = {queryClient}>
+    <QueryClientProvider client={queryClient}>
       <AuthContextProvider>
         <RouterProvider router={route} />
       </AuthContextProvider>

@@ -3,9 +3,23 @@ import { Button, Dialog, DialogPanel, DialogTitle } from "@headlessui/react";
 import { useState } from "react";
 import { authContext } from "../../../Contexts/AuthContext/AuthContext";
 import axios from "axios";
+import { useQuery } from "@tanstack/react-query";
+import useAxiosSecure from "@/CustomHooks/useAxiosSecure";
 
 const ManageParcelModal = ({ isOpen, setIsOpen, _id}) => {
-  const { allUsers } = useContext(authContext);
+  const axiosSecure = useAxiosSecure()
+    const {
+      data: allUsers = [],
+      isLoading,
+      refetch,
+    } = useQuery({
+      queryKey: ["users"],
+      queryFn: async () => {
+        const { data } = await axiosSecure.get('/users')
+        return data;
+      },
+    });
+  
 
   const getAllDeliveryMens = () => {
     const deliveryMens =

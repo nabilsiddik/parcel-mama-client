@@ -13,6 +13,7 @@ import Swal from "sweetalert2";
 import { auth } from "../../Firebase/firebase.init";
 import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
+import useAxiosSecure from "@/CustomHooks/useAxiosSecure";
 
 export const authContext = createContext(null);
 
@@ -20,28 +21,12 @@ const AuthContextProvider = ({ children }) => {
   const [allTutorials, setAllTutorials] = useState([]);
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const axiosSecure = useAxiosSecure()
 
   const [darkMode, setDarkMode] = useState(() => {
     return localStorage.getItem("theme") === "dark";
   });
   const [limitNumberOfEquipment, setLimitNumberOfEquipment] = useState([]);
-
-
-  const {
-    data: allUsers = [],
-    isLoading,
-    refetch,
-  } = useQuery({
-    queryKey: ["users"],
-    queryFn: async () => {
-      const { data } = await axios.get(
-        `${import.meta.env.VITE_MAIN_URL}/users`
-      );
-
-      return data;
-    },
-  });
-
 
 
 
@@ -179,11 +164,14 @@ const AuthContextProvider = ({ children }) => {
     const unsubscribe = onAuthStateChanged(auth, async(currentUser) => {
       if (currentUser?.email) {
         setUser(currentUser);
-        // const {data} = await axios.post(`${import.meta.env.VITE_MAIN_URL}/jwt`, {
-        //     email: currentUser?.email
-        // }, {withCredentials: true})
-        // console.log(data)
-        console.log(currentUser)
+        // get token and store client side
+        const userInfo = {email : currentUser?.email}
+        const axiosPublic = await axios.post(`${import.meta.env.VITE_MAIN_URL}/jwt`, userInfo, {withCredentials: true})
+        .then(res => {
+          if(res.data.token){
+            localStorage.setItem('access-token', res.data.token)
+          }
+        })
 
         // Send new user data database
         const {data} = await axios.post(`${import.meta.env.VITE_MAIN_URL}/users/${currentUser?.email}`, {
@@ -192,9 +180,8 @@ const AuthContextProvider = ({ children }) => {
           image: currentUser?.photoURL
         })
       }else{
-        console.log('user not available')
-
         // const {data} = await axios.get(`${import.meta.env.VITE_MAIN_URL}/logout`, {withCredentials: true})
+        localStorage.removeItem('access-token')
       }
 
       setLoading(false)
@@ -218,7 +205,7 @@ const AuthContextProvider = ({ children }) => {
     setAllTutorials,
     darkMode,
     setDarkMode,
-    allUsers
+    // allUsers
   };
 
   return (
