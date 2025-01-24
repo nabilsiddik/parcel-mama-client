@@ -8,10 +8,12 @@ import {
   CardTitle,
 } from "@/components/ui/card"
 import StatisticsCard from '@/Components/StatisticsCard/StatisticsCard';
+import useAxiosSecure from '@/CustomHooks/useAxiosSecure';
 
 
 const StatisticsSection = () => {
-
+ const axiosSecure = useAxiosSecure()
+ const token = localStorage.getItem('access-token')
   const {
     data: allUsers = [],
     isLoading,
@@ -20,10 +22,10 @@ const StatisticsSection = () => {
     queryKey: ["users"],
     queryFn: async () => {
       const { data } = await axios.get(`
-            ${import.meta.env.VITE_MAIN_URL}/users`);
-
+        ${import.meta.env.VITE_MAIN_URL}/users
+      `);
       return data;
-    },
+    }
   })
 
 
@@ -49,6 +51,7 @@ const StatisticsSection = () => {
       const { data } = await axios.get(`
             ${import.meta.env.VITE_MAIN_URL}/delivered-parcels
           `);
+
 
       return data;
     },

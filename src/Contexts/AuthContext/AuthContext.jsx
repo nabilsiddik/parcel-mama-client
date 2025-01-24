@@ -140,6 +140,7 @@ const AuthContextProvider = ({ children }) => {
   const userSignOut = () => {
     return signOut(auth)
       .then(() => {
+        localStorage.removeItem('access-token');
         setUser(null)
         Swal.fire({
           position: "center center",
@@ -182,6 +183,7 @@ const AuthContextProvider = ({ children }) => {
       }else{
         // const {data} = await axios.get(`${import.meta.env.VITE_MAIN_URL}/logout`, {withCredentials: true})
         localStorage.removeItem('access-token')
+        setUser(null)
       }
 
       setLoading(false)

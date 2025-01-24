@@ -65,6 +65,9 @@ body{
     border-radius: 10px;
 }
 
+#header .menu .active{
+    border-bottom: 3px solid red;
+}
 
 /* #stripe_payment_form .__PrivateStripeElement{
     display: none!important;

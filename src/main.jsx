@@ -28,6 +28,7 @@ import axios from "axios";
 import Checkout from "./Dashboard/DashboardPages/Checkout/Checkout";
 import PaymentSuccess from "./Dashboard/DashboardPages/PaymentSuccess/PaymentSuccess";
 import UserContextProvider from "./Contexts/UserContext/UserContext";
+import AdminRoute from "./PrivateRoute/AdminRoute";
 
 const queryClient = new QueryClient();
 
@@ -89,27 +90,27 @@ const route = createBrowserRouter([
       },
       {
         path: "statistics",
-        element: <PrivateRoute>
+        element: <AdminRoute>
           <Statistics />
-        </PrivateRoute>,
+        </AdminRoute>,
       },
       {
         path: "all-parcels",
-        element: <PrivateRoute>
+        element: <AdminRoute>
           <AllParcels />
-        </PrivateRoute>,
+        </AdminRoute>,
       },
       {
         path: 'all-users',
-        element: <PrivateRoute>
+        element: <AdminRoute>
           <AllUsers />
-        </PrivateRoute>
+        </AdminRoute>
       },
       {
         path: 'all-delivery-man',
-        element: <PrivateRoute>
+        element: <AdminRoute>
           <AllDeliveryMan />
-        </PrivateRoute>
+        </AdminRoute>
       },
       {
         path: 'my-delivery-list',
