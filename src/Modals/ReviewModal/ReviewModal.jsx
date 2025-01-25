@@ -11,6 +11,7 @@ const ReviewModal = ({ isOpen, setIsOpen, parcelId }) => {
 
     const { user } = useContext(authContext)
     const [deliveryManId, setDeliveryManId] = useState(null)
+    const [parcelStatus, setParcelStatus] = useState('')
 
     // Fetch delivery man id
     useEffect(() => {
@@ -30,6 +31,25 @@ const ReviewModal = ({ isOpen, setIsOpen, parcelId }) => {
         fetchDeliveryManId();
     }, [parcelId, isOpen])
 
+
+    // Get parcel status
+    useEffect(() => {
+        const getCurrentParcel = async () => {
+            if (parcelId) {
+                try {
+                    const res = await axios.get(
+                        `${import.meta.env.VITE_MAIN_URL}/parcel/${parcelId}`
+                    );
+                    setParcelStatus(res.data.status);
+                } catch (err) {
+                    console.log('Error while getting deliveryman id', err)
+                }
+            }
+        }
+
+        getCurrentParcel();
+    }, [parcelId, isOpen])
+
     // Submit review
     const handleSubmitReview = async (parcelId, e) => {
         e.preventDefault()
@@ -41,13 +61,15 @@ const ReviewModal = ({ isOpen, setIsOpen, parcelId }) => {
             name: user?.displayName,
             image: user?.photoURL,
         }
+        const reviewDate = new Date()
         const deliveryMan = deliveryManId
 
         const review = {
             rating,
             feedback,
             reviewGiver,
-            deliveryMan
+            deliveryMan,
+            reviewDate
         }
 
         try {
@@ -92,7 +114,7 @@ const ReviewModal = ({ isOpen, setIsOpen, parcelId }) => {
                                 <Textarea name='feedback' rows='5' placeholder='Write your feedback ...' />
                             </div>
                             <div className='mb-3'>
-                                <Input className='bg-black text-white' type='submit' value='Submit' />
+                                <Input disabled={(deliveryManId && parcelStatus === 'delivered') ? false : true} className='bg-black text-white cursor-pointer' type='submit' value='Submit' />
                             </div>
                         </form>
 

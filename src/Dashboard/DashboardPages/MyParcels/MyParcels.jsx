@@ -21,6 +21,7 @@ const MyParcels = () => {
   const [isOpen, setIsOpen] = useState(false)
   const [parcelId, setParcelId] = useState(null)
 
+
   const {
     data: parcels = [],
     isLoading,
@@ -35,6 +36,7 @@ const MyParcels = () => {
       return data;
     },
   })
+
 
 
   const handleCancleParcel = (_id) => {
@@ -83,7 +85,8 @@ const MyParcels = () => {
     setParcelId(_id)
     setIsOpen(true)
   }
-  
+
+
 
   if (isLoading) {
     return <h1>Loading ...</h1>
@@ -92,7 +95,7 @@ const MyParcels = () => {
   return (
     <div>
       <h3 className="py-8">My Parcels</h3>
-      <ReviewModal isOpen={isOpen} setIsOpen={setIsOpen} parcelId = {parcelId}/>
+      <ReviewModal isOpen={isOpen} setIsOpen={setIsOpen} parcelId={parcelId} />
       <div className="rounded-md border">
         <Table>
           <TableHeader>
@@ -135,10 +138,10 @@ const MyParcels = () => {
                           <Button disabled={status === 'pending' ? false : true}>Update</Button>
                         </Link>
 
-                        <Button disabled={status === 'pending'? false : true} onClick={() => handleCancleParcel(_id)}>Cancle</Button>
+                        <Button disabled={status === 'pending' ? false : true} onClick={() => handleCancleParcel(_id)}>Cancle</Button>
                       </div>
                       <div className="flex gap-2">
-                        <Button onClick = {() => handleReview(_id)}>Review</Button>
+                        <Button onClick={() => handleReview(_id)}>Review</Button>
                         <Link to={`/dashboard/checkout/${_id}`}>
                           <Button>Pay</Button>
                         </Link>

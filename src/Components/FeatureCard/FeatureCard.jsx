@@ -2,12 +2,12 @@ import React from 'react'
 
 const FeatureCard = ({title, description, icon}) => {
   return (
-    <div className="text-center border py-10 px-5 rounded-lg">
+    <div className="text-center border py-10 px-5 rounded-lg group">
         <div className="flex justify-center mb-4">
           <img
             src={icon && icon}
             alt="icon"
-            className="w-24 h-24"
+            className="w-24 h-24 group-hover:scale-[1.2] transition-all"
           />
         </div>
         <h3 className="text-xl font-bold mb-2">{title && title}</h3>

@@ -5,21 +5,22 @@ import { authContext } from "../../../Contexts/AuthContext/AuthContext";
 import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "@/CustomHooks/useAxiosSecure";
+import Swal from "sweetalert2";
 
-const ManageParcelModal = ({ isOpen, setIsOpen, _id}) => {
+const ManageParcelModal = ({ isOpen, setIsOpen, _id }) => {
   const axiosSecure = useAxiosSecure()
-    const {
-      data: allUsers = [],
-      isLoading,
-      refetch,
-    } = useQuery({
-      queryKey: ["users"],
-      queryFn: async () => {
-        const { data } = await axiosSecure.get('/users')
-        return data;
-      },
-    });
-  
+  const {
+    data: allUsers = [],
+    isLoading,
+    refetch,
+  } = useQuery({
+    queryKey: ["users"],
+    queryFn: async () => {
+      const { data } = await axiosSecure.get('/users')
+      return data;
+    },
+  });
+
 
   const getAllDeliveryMens = () => {
     const deliveryMens =
@@ -29,7 +30,7 @@ const ManageParcelModal = ({ isOpen, setIsOpen, _id}) => {
     return deliveryMens;
   };
 
-  const handleAssignDeliveryMan = async(e, _id) => {
+  const handleAssignDeliveryMan = async (e, _id) => {
     e.preventDefault()
     const form = e.target
 
@@ -37,9 +38,24 @@ const ManageParcelModal = ({ isOpen, setIsOpen, _id}) => {
     const apprDelDate = form.apprDelDate.value
 
 
-    const res = await axios.patch(`${import.meta.env.VITE_MAIN_URL}/setdeliveryman/${_id}`, {deliveryMan, apprDelDate})
-
-    console.log(_id)
+    const res = await axiosSecure.patch(`${import.meta.env.VITE_MAIN_URL}/setdeliveryman/${_id}`, { deliveryMan, apprDelDate })
+    console.log(res.data)
+    if (res.data.modifiedCount) {
+      Swal.fire({
+        position: "center center",
+        icon: "success",
+        title: "Parcel Successfully Assigned",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+    } else {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Something went wrong!",
+        footer: `Parcel is not assigned`,
+      })
+    }
   };
 
   return (
