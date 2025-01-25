@@ -22,8 +22,6 @@ const MyProfile = () => {
 
   const {
     data: currentUser = {},
-    isLoading,
-    refetch,
   } = useQuery({
     queryKey: ["user", user?.email],
     queryFn: async () => {

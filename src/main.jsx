@@ -18,7 +18,7 @@ import AllParcels from "./Dashboard/AdminPages/AllParcels/AllParcels.jsx";
 import AllUsers from "./Dashboard/AdminPages/AllUsers/AllUsers.jsx";
 import AllDeliveryMan from "./Dashboard/AdminPages/AllDeliveryMen/AllDeliveryMan.jsx";
 import MyDeliveryList from "./Dashboard/DeliveryManPages/MyDeliveryList/MyDeliveryList.jsx";
-import AllReviews from "./Dashboard/DeliveryManPages/AllReviews/AllReviews.jsx";
+import AllReviews from "./Dashboard/DeliveryManPages/AllReviews/MyReviews.jsx";
 import PrivateRoute from "./PrivateRoute/PrivateRoute.jsx";
 import AuthenticationPage from "./Pages/AuthenticationPage/AuthenticationPage";
 import LoginCard from "./Components/LoginCard/LoginCard";
@@ -29,6 +29,7 @@ import Checkout from "./Dashboard/DashboardPages/Checkout/Checkout";
 import PaymentSuccess from "./Dashboard/DashboardPages/PaymentSuccess/PaymentSuccess";
 import UserContextProvider from "./Contexts/UserContext/UserContext";
 import AdminRoute from "./PrivateRoute/AdminRoute";
+import MyReviews from "./Dashboard/DeliveryManPages/AllReviews/MyReviews.jsx";
 
 const queryClient = new QueryClient();
 
@@ -119,9 +120,9 @@ const route = createBrowserRouter([
         </PrivateRoute>
       },
       {
-        path: 'all-reviews',
+        path: 'my-reviews',
         element: <PrivateRoute>
-          <AllReviews />
+          <MyReviews />
         </PrivateRoute>
       },
       {

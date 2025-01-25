@@ -60,8 +60,8 @@ const SideMenu = () => {
           <NavLink className={"font-bold text-black"} to={"my-delivery-list"}>
             My Delivery List
           </NavLink>
-          <NavLink className={"font-bold text-black"} to={"all-reviews"}>
-            All Reviews
+          <NavLink className={"font-bold text-black"} to={"my-reviews"}>
+            My Reviews
           </NavLink>
         </ul>
       )}

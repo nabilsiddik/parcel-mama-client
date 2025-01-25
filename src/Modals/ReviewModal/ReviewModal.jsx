@@ -5,6 +5,7 @@ import { Textarea } from "@/components/ui/textarea"
 import { authContext } from '@/Contexts/AuthContext/AuthContext'
 import axios from 'axios'
 import Swal from 'sweetalert2'
+import { useQuery } from '@tanstack/react-query'
 
 
 const ReviewModal = ({ isOpen, setIsOpen, parcelId }) => {
@@ -12,6 +13,22 @@ const ReviewModal = ({ isOpen, setIsOpen, parcelId }) => {
     const { user } = useContext(authContext)
     const [deliveryManId, setDeliveryManId] = useState(null)
     const [parcelStatus, setParcelStatus] = useState('')
+
+    // get current user
+    const {
+        data: currentUser = {},
+    } = useQuery({
+        queryKey: ["user", user?.email],
+        queryFn: async () => {
+            const { data } = await axios.get(
+                `${import.meta.env.VITE_MAIN_URL}/user/${user?.email}`
+            );
+
+            return data;
+        },
+    });
+
+    console.log(currentUser._id, currentUser.role)
 
     // Fetch delivery man id
     useEffect(() => {
@@ -72,30 +89,38 @@ const ReviewModal = ({ isOpen, setIsOpen, parcelId }) => {
             reviewDate
         }
 
+        // Post review to database
         try {
-            const {data} = await axios.post(`${import.meta.env.VITE_MAIN_URL}/reviews`, review)
+            const { data } = await axios.post(`${import.meta.env.VITE_MAIN_URL}/reviews`, review)
 
-            if(data.insertedId){
+            if (data.insertedId) {
+                // Update rating on deliveryman
+                const { data } = await axios.patch(`${import.meta.env.VITE_MAIN_URL}/update-deliverman-rating/${parcelId}`, { rating: rating })
+                if (data.modifiedCount > 0) {
+                    console.log('success')
+                } else {
+                    console.log('not success')
+                }
+
                 Swal.fire({
                     position: "center center",
                     icon: "success",
                     title: "Thanks for Submitting Review",
                     showConfirmButton: false,
                     timer: 1500,
-                  })
-            }else{
+                })
+            } else {
                 Swal.fire({
                     icon: "error",
                     title: "Oops...",
                     text: "Something went wrong! While Submitting the review",
                     footer: `${error.code}. ${error.message}`,
-                  })
+                })
             }
-            
-        }catch(err){
+
+        } catch (err) {
             console.log(err)
         }
-        
 
     }
 
