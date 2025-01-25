@@ -47,8 +47,8 @@ const UpdatePage = () => {
     return (
         <div id='update_page'>
             <div className="container py-10">
-                <h1 className='mb-10 text-center'>Update Tutorial</h1>
-                <form onSubmit={handleUpdateTutorial} className='w-11/12 md:w-8/12 lg:w-6/12 mx-auto'>
+                <h3 className='mb-10 text-center'>Update Tutorial</h3>
+                <form onSubmit={handleUpdateTutorial} className='w-11/12 md:w-8/12 lg:w-6/12 mx-auto '>
 
                     <div className="form-control">
                         <label className="label">

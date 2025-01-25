@@ -22,6 +22,7 @@ const MyProfile = () => {
 
   const {
     data: currentUser = {},
+    refetch
   } = useQuery({
     queryKey: ["user", user?.email],
     queryFn: async () => {
@@ -31,12 +32,13 @@ const MyProfile = () => {
 
       return data;
     },
+    enabled: !!user?.email,
   });
 
   const handleUpdateProfile = async () => {
     const imageUrl = await imageUpload(selectedImiage);
-    profileUpdate({ displayName: name, photoURL: imageUrl });
-    refetch()
+    await profileUpdate({ displayName: name, photoURL: imageUrl });
+    await refetch()
   };
 
   return (
@@ -55,21 +57,22 @@ const MyProfile = () => {
         </div>
       </div>
 
-      <div className="shadow-lg w-full md:w-6/12 lg:w-4/12 mt-10 py-5 px-5 rounded-lg">
-        <h3 className="mb-8">Update Profile</h3>
-        <form className="flex flex-col gap-3">
+      <div className="shadow-lg w-full p-5 mt-2 rounded-lg">
+        <form className="flex flex-col gap-3 md:w-10/12 lg:w-8/12 mx-auto">
+
+          <h3 className="mb-4">Update Profile</h3>
           <div>
             <Label htmlFor="email">Upload Image</Label>
             <Input className='py-4 pb-8 mt-2' onChange={handleImageChange}
               name="image"
               type="file"
-              accept="images/*" />
+              accept="image/*" />
           </div>
           <div>
             <Input onChange={(e) => setName(e.target.value)}
               type="text"
-              value={name}
               placeholder="Name"
+              value={name}
               className="input input-bordered py-6" />
 
           </div>

@@ -20,7 +20,31 @@ const MyParcels = () => {
   const { user } = useContext(authContext);
   const [isOpen, setIsOpen] = useState(false)
   const [parcelId, setParcelId] = useState(null)
+  const [selectedStatus, setSelectedStatus] = useState("pending")
+  const [sortedParcels, setSortedParcels] = useState([])
 
+
+  const handleStatusChange = (event) => {
+    const value = event.target.value;
+    setSelectedStatus(value);
+    getSortedData(value)
+  };
+
+
+  const getSortedData = async (status) => {
+    try {
+      const {data} = await axios.get(
+        `${import.meta.env.VITE_MAIN_URL}/sort-parcel?status=${status}`
+      );
+      setSortedParcels(data)
+
+    } catch (error) {
+      console.error("Error fetching sorted data:", error);
+    }
+  };
+
+  
+console.log(sortedParcels)
 
   const {
     data: parcels = [],
@@ -93,8 +117,16 @@ const MyParcels = () => {
   }
 
   return (
-    <div>
-      <h3 className="py-8">My Parcels</h3>
+    <div className="py-8">
+      <div className="mb-5 flex items-center justify-between">
+        <h3>My Parcels</h3>
+        <select onChange={handleStatusChange} value={selectedStatus} className="select select-bordered">
+          <option value="pending">Pending</option>
+          <option value="ontheway">On The Way</option>
+          <option value="cancled">Cancled</option>
+          <option value="delivered">Delivered</option>
+        </select>
+      </div>
       <ReviewModal isOpen={isOpen} setIsOpen={setIsOpen} parcelId={parcelId} />
       <div className="rounded-md border">
         <Table>
@@ -106,14 +138,12 @@ const MyParcels = () => {
               <TableHead>Approximate Date</TableHead>
               <TableHead>Booking Date</TableHead>
               <TableHead>Status</TableHead>
-              <TableHead>Type</TableHead>
               <TableHead>Actions</TableHead>
             </TableRow>
           </TableHeader>
 
           <TableBody>
-            {parcels &&
-              parcels.map((parcel) => {
+            {(sortedParcels.length > 0 ? sortedParcels : parcels).map((parcel) => {
                 const {
                   _id,
                   parcelType,
@@ -121,17 +151,17 @@ const MyParcels = () => {
                   deliveryDate,
                   bookingDate,
                   status,
-                  apprDeliDate
+                  apprDeliDate,
+                  reqDeliveryDate,
                 } = parcel;
                 return (
                   <TableRow key={_id}>
                     <TableCell>{parcelType && parcelType}</TableCell>
                     <TableCell>{deliveryAddress && deliveryAddress}</TableCell>
-                    <TableCell>{deliveryDate && deliveryDate}</TableCell>
+                    <TableCell>{reqDeliveryDate && reqDeliveryDate}</TableCell>
                     <TableCell>{apprDeliDate && apprDeliDate}</TableCell>
-                    <TableCell>{bookingDate && bookingDate}</TableCell>
+                    <TableCell>{bookingDate && new Date(bookingDate).toLocaleDateString()}</TableCell>
                     <TableCell>{status && status}</TableCell>
-                    <TableCell>{parcelType && parcelType}</TableCell>
                     <TableCell>
                       <div className="flex gap-2 mb-3">
                         <Link to={status === 'pending' ? `/dashboard/update-parcel/${_id}` : ''}>

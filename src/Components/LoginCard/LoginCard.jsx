@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button"
 import { FcGoogle } from "react-icons/fc";
 import { Link } from 'react-router-dom';
 import { authContext } from '@/Contexts/AuthContext/AuthContext';
+import Swal from 'sweetalert2';
 
 
 const LoginCard = () => {
@@ -19,6 +20,15 @@ const LoginCard = () => {
         const form = e.target
         const email = form.email.value
         const password = form.password.value
+
+        if (!email || !password) {
+            Swal.fire({
+                icon: "error",
+                title: "Field Missing",
+                text: "Please Fill out the required fields",
+            });
+            return;
+        } 
         signIn(email, password)
     }
 

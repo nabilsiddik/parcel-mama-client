@@ -26,10 +26,21 @@ const BookParcel = () => {
     const receiverName = form.receiverName.value;
     const receiverPhoneNumber = form.receiverPhoneNumber.value;
     const deliveryAddress = form.deliveryAddress.value;
-    const deliveryDate = new Date(form.deliveryDate.value);
+    const bookingDate = new Date(form.deliveryDate.value);
+    const reqDeliveryDate = form.reqDeliveryDate.value;
     const latitude = form.latitude.value;
     const longitude = form.longitude.value;
 
+    if (!phoneNumber || !parcelType || !parcelWeight || !receiverName || !receiverPhoneNumber || !deliveryAddress || !reqDeliveryDate || !latitude || !longitude) {
+      Swal.fire({
+        icon: "error",
+        title: "Missing Fields",
+        text: "Please fill out the required fields"
+      });
+      return
+    }
+
+    
     const parcel = {
       customer: {
         name: user?.displayName,
@@ -41,7 +52,8 @@ const BookParcel = () => {
       receiverName,
       receiverPhoneNumber,
       deliveryAddress,
-      deliveryDate,
+      reqDeliveryDate,
+      bookingDate,
       latitude,
       longitude,
     };
@@ -65,7 +77,10 @@ const BookParcel = () => {
           showConfirmButton: false,
           timer: 1500,
         });
+
+        form.reset()
       }
+      
     } catch (error) {
       Swal.fire({
         icon: "error",
@@ -76,6 +91,7 @@ const BookParcel = () => {
     }
 
   };
+
 
   return (
     <div className="py-8">
@@ -88,16 +104,17 @@ const BookParcel = () => {
         <form className="xl:w-1/2 border p-10" onSubmit={handleAddParcel}>
           <div className="mb-4 flex items-center gap-5">
             <div className="w-1/2">
-              <Label htmlFor="phoneNumber">Phone Number</Label>
+              <Label htmlFor="phoneNumber">Phone Number <span className="text-red-600">*</span></Label>
               <Input
+                max='11'
                 id="phoneNumber"
                 name="phoneNumber"
-                type="tel"
+                type="number"
                 placeholder="Phone Number"
               />
             </div>
             <div className="w-1/2">
-              <Label htmlFor="parcelType">Parcel Type</Label>
+              <Label htmlFor="parcelType">Parcel Type <span className="text-red-600">*</span></Label>
               <Input
                 id="parcelType"
                 name="parcelType"
@@ -109,7 +126,7 @@ const BookParcel = () => {
 
           <div className="mb-4 flex items-center gap-5">
             <div className="w-1/2">
-              <Label htmlFor="parcelWeight">Parcel Weight</Label>
+              <Label htmlFor="parcelWeight">Parcel Weight <span className="text-red-600">*</span></Label>
               <Input
                 id="parcelWeight"
                 name="parcelWeight"
@@ -118,7 +135,7 @@ const BookParcel = () => {
               />
             </div>
             <div className="w-1/2">
-              <Label htmlFor="receiverName">Receiver's Name</Label>
+              <Label htmlFor="receiverName">Receiver's Name <span className="text-red-600">*</span></Label>
               <Input
                 id="receiverName"
                 name="receiverName"
@@ -130,22 +147,23 @@ const BookParcel = () => {
 
           <div className="mb-4 flex items-center gap-5">
             <div className="w-1/2">
-              <Label htmlFor="receiverPhoneNumber">Receiver's Phone Number</Label>
+              <Label htmlFor="receiverPhoneNumber">Receiver's Phone Number <span className="text-red-600">*</span></Label>
               <Input
+                max='11'
                 id="receiverPhoneNumber"
                 name="receiverPhoneNumber"
-                type="tel"
+                type="num"
                 placeholder="Receiver's Phone Number"
               />
             </div>
             <div className="w-1/2">
-              <Label htmlFor="deliveryDate">Requested Delivery Date</Label>
-              <Input id="deliveryDate" name="deliveryDate" type="date" />
+              <Label htmlFor="reqDeliveryDate">Requested Delivery Date <span className="text-red-600">*</span></Label>
+              <Input id="deliveryDate" name="reqDeliveryDate" type="date" />
             </div>
           </div>
 
           <div className="mb-4">
-            <Label htmlFor="deliveryAddress">Parcel Delivery Address</Label>
+            <Label htmlFor="deliveryAddress">Parcel Delivery Address <span className="text-red-600">*</span></Label>
             <Input
               id="deliveryAddress"
               name="deliveryAddress"
@@ -156,7 +174,7 @@ const BookParcel = () => {
 
           <div className="mb-4 flex items-center gap-5">
             <div className="w-1/2">
-              <Label htmlFor="latitude">Delivery Address Latitude</Label>
+              <Label htmlFor="latitude">Delivery Address Latitude <span className="text-red-600">*</span></Label>
               <Input
                 id="latitude"
                 name="latitude"
@@ -166,7 +184,7 @@ const BookParcel = () => {
               />
             </div>
             <div className="w-1/2">
-              <Label htmlFor="longitude">Delivery Address Longitude</Label>
+              <Label htmlFor="longitude">Delivery Address Longitude <span className="text-red-600">*</span></Label>
               <Input
                 id="longitude"
                 name="longitude"

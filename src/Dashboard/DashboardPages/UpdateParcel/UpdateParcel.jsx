@@ -33,7 +33,7 @@ const UpdateParcel = () => {
       receiverName: form.receiverName.value,
       receiverPhoneNumber: form.receiverPhoneNumber.value,
       deliveryAddress: form.deliveryAddress.value,
-      deliveryDate: form.deliveryDate.value,
+      reqDeliveryDate: form.reqDeliveryDate.value,
       latitude: form.latitude.value,
       longitude: form.longitude.value,
     };
@@ -68,9 +68,9 @@ const UpdateParcel = () => {
   if (isLoading) return <p>Loading...</p>;
 
   return (
-    <div>
-      <h2>Update Parcel</h2>
-      <form onSubmit={handleUpdateParcel}>
+    <div className="py-8">
+      <h2 className="mb-5 text-center">Update Parcel</h2>
+      <form onSubmit={handleUpdateParcel} className="w-11/12 md:w-10/12 lg:w-8/12 mx-auto">
         <div className="input-group mb-3">
           <label className="label">Phone Number</label>
           <input
@@ -140,9 +140,9 @@ const UpdateParcel = () => {
         <div className="input-group mb-3">
           <label className="label">Requested Delivery Date</label>
           <input
-            name="deliveryDate"
+            name="reqDeliveryDate"
             type="date"
-            defaultValue={parcel.deliveryDate?.split("T")[0]} // Format the date
+            defaultValue={parcel.deliveryDate?.split("T")[0]}
             className="input input-bordered w-full"
           />
         </div>

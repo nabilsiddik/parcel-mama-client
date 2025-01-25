@@ -17,6 +17,7 @@ import {
 } from "@/components/ui/select"
 import axios from 'axios';
 import { imageUpload } from '@/api/utils';
+import Swal from 'sweetalert2';
 
 
 const RegistrationCard = () => {
@@ -39,17 +40,25 @@ const RegistrationCard = () => {
         const email = form.email.value;
         const phone = form.phone.value;
         const image = form.image.files[0]
-
+        const role = form.role.value
         const imageUrl = await imageUpload(image)
-        createUser(email, password, name, imageUrl)
 
-        await axios.post(`${import.meta.env.VITE_MAIN_URL}/users/${email}`, {
-            name,
-            email,
-            phone,
-            image: imageUrl,
-            role,
-        });
+
+        // Create user 
+        createUser(email, password, name, imageUrl)
+        .then(async () => {
+            // Send user to database if not exist already
+            const res = await axios.post(`${import.meta.env.VITE_MAIN_URL}/users/${email}`, {
+                name,
+                email,
+                phone,
+                image: imageUrl,
+                role,
+            })
+        })
+
+
+
     }
 
     return (
@@ -92,7 +101,7 @@ const RegistrationCard = () => {
                             className='pt-5 pb-10 cursor-pointer'
                         />
 
-                        <Select value={role} onValueChange={handleRoleChange} className='role'>
+                        <Select name='role' value={role} onValueChange={handleRoleChange} className='role'>
                             <SelectTrigger className="w-full mt-3 py-6">
                                 <SelectValue placeholder="Select Role" />
                             </SelectTrigger>

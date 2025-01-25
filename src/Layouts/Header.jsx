@@ -21,12 +21,29 @@ import {
     NavigationMenuViewport,
 } from "@/components/ui/navigation-menu"
 import { navigationMenuTriggerStyle } from "@/components/ui/navigation-menu"
+import { useQuery } from '@tanstack/react-query';
+import axios from 'axios';
 
 
 const Header = () => {
 
     const { user, userSignOut, darkMode, setDarkMode } = useContext(authContext)
     const [showProfileMenu, setShowProfileMenu] = useState(false)
+
+    // get current user
+    const {
+        data: currentUserRole = {},
+    } = useQuery({
+        queryKey: ["user", user?.email],
+        queryFn: async () => {
+            const { data } = await axios.get(
+                `${import.meta.env.VITE_MAIN_URL}/user/${user?.email}`
+            );
+
+            return data.role;
+        },
+    });
+
 
     const handleLogout = () => {
         userSignOut()
