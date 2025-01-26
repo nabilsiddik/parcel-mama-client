@@ -50,13 +50,14 @@ const AllDeliveryMan = () => {
                   name,
                   numOfDeliveredParcel,
                   phone,
+                  avarageRating
                 } = deliveryMan;
                 return (
                   <TableRow key={_id}>
                     <TableCell>{name && name}</TableCell>
                     <TableCell>{phone && phone}</TableCell>
                     <TableCell>{numOfDeliveredParcel && numOfDeliveredParcel}</TableCell>
-                    <TableCell>Review</TableCell>
+                    <TableCell>{avarageRating && `${avarageRating.toFixed(2)} Star`} </TableCell>
                   </TableRow>
                 )
               })}

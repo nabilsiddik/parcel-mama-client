@@ -33,6 +33,7 @@ const AllUsers = () => {
 
 
   const handleMakeAdmin = (_id) => {
+    console.log(_id)
     const swalWithBootstrapButtons = Swal.mixin({
       customClass: {
         confirmButton: "btn btn-success",
@@ -50,14 +51,23 @@ const AllUsers = () => {
       reverseButtons: true
     }).then(async (result) => {
       if (result.isConfirmed) {
-        swalWithBootstrapButtons.fire({
-          title: "Admin Done!",
-          text: "You made him/her admin",
-          icon: "success"
-        });
-
         // Make admin request to database
-        const res = await axios.patch(`${import.meta.env.VITE_MAIN_URL}/make-admin/${_id}`)
+        const res = await axiosSecure.patch(`/make-admin/${_id}`)
+
+        console.log(res.data)
+        if (res.data.modifiedCount > 0) {
+          swalWithBootstrapButtons.fire({
+            title: "Admin Done!",
+            text: "You made him/her admin",
+            icon: "success"
+          });
+        }else{
+          swalWithBootstrapButtons.fire({
+            title: "Something Wrong",
+            text: "Something wrong or user is already admin",
+            icon: "error"
+          });
+        }
 
         refetch()
       } else if (
@@ -90,14 +100,22 @@ const AllUsers = () => {
       reverseButtons: true
     }).then(async (result) => {
       if (result.isConfirmed) {
-        swalWithBootstrapButtons.fire({
-          title: "Delivery Man Done!",
-          text: "You made him/her Delivery Man",
-          icon: "success"
-        });
-
         // Make admin request to database
-        const res = await axios.patch(`${import.meta.env.VITE_MAIN_URL}/make-deliveryman/${_id}`)
+        const res = await axiosSecure.patch(`/make-deliveryman/${_id}`)
+        console.log(res.data)
+        if (res.data.modifiedCount > 0) {
+          swalWithBootstrapButtons.fire({
+            title: "Delivery Man Done!",
+            text: "You made him/her Delivery Man",
+            icon: "success"
+          });
+        }else{
+          swalWithBootstrapButtons.fire({
+            title: "Something Wrong",
+            text: "Something wrong or user is already deliveryman",
+            icon: "error"
+          });
+        }
 
         refetch()
       } else if (
@@ -139,10 +157,10 @@ const AllUsers = () => {
                     <TableCell>{bookedParcel && bookedParcel}</TableCell>
                     <TableCell>BDT {totalSpent && totalSpent}</TableCell>
                     <TableCell>
-                      <Button onClick={() => handleMakeAdmin(_id)}>Make Admin</Button>
+                      <Button disabled={role === 'admin' ? true : false} onClick={() => handleMakeAdmin(_id)}>Make Admin</Button>
                     </TableCell>
                     <TableCell>
-                      <Button onClick={() => handleMakeDeliveryMan(_id)}>Make Delivery Man</Button>
+                      <Button disabled={role === 'deliveryman' ? true : false} onClick={() => handleMakeDeliveryMan(_id)}>Make Delivery Man</Button>
                     </TableCell>
                   </TableRow>
                 )

@@ -190,7 +190,7 @@ const MyDeliveryList = () => {
                   receiverName,
                   receiverPhoneNumber,
                   deliveryAddress,
-                  deliveryDate,
+                  reqDeliveryDate,
                   latitude,
                   longitude,
                   price,
@@ -204,7 +204,7 @@ const MyDeliveryList = () => {
                     <TableCell>{name && name}</TableCell>
                     <TableCell>{receiverName && receiverName}</TableCell>
                     <TableCell>{phoneNumber && phoneNumber}</TableCell>
-                    <TableCell>{deliveryDate && deliveryDate}</TableCell>
+                    <TableCell>{reqDeliveryDate && reqDeliveryDate}</TableCell>
                     <TableCell>{apprDeliDate && apprDeliDate}</TableCell>
                     <TableCell>{receiverPhoneNumber && receiverPhoneNumber}</TableCell>
                     <TableCell>{deliveryAddress && deliveryAddress}</TableCell>
