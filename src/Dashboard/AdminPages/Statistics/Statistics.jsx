@@ -34,8 +34,6 @@ const Statistics = () => {
   const dates = Object.keys(dateCounts)
   const counts = Object.values(dateCounts)
 
-  console.log(dates, counts)
-
 
   useEffect(() => {
     var chart1 = {

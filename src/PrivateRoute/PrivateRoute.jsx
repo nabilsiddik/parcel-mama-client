@@ -1,13 +1,14 @@
 import React, { useContext } from 'react'
 import { authContext } from '../Contexts/AuthContext/AuthContext'
 import { Navigate } from 'react-router-dom'
+import LoadingPage from '@/Pages/LoadingPage/LoadingPage'
 
 const PrivateRoute = ({children}) => {
 
     const {user, loading} = useContext(authContext)
 
     if(loading){
-        return <h1>Loading ...</h1>
+        return <LoadingPage/>
     }
 
     if(user?.email){

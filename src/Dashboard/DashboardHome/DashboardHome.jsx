@@ -53,8 +53,8 @@ const DashboardHome = () => {
     }
 
     return (
-        <div className="flex h-screen bg-gray-100 overflow-x-hidden">
-            <aside className={`${isSidebarOpen ? 'translate-x-[0%]' : 'translate-x-[-100%]' } bg-[#ffcc00] border-r border-gray-200 transition-all duration-300 absolute xl:w-[15%] lg:w-[20%] w-[80%] min-h-screen z-10 lg:fixed`}>
+        <div className="flex bg-gray-100 overflow-x-hidden h-screen">
+            <aside className={`${isSidebarOpen ? 'translate-x-[0%]' : 'translate-x-[-100%]' } bg-[#ffcc00] border-r border-gray-200 transition-all duration-300 absolute xl:w-[15%] lg:w-[20%] w-[80%] min-h-screen z-10 lg:fixed flex flex-col  h-screen`}>
                 <div className="flex items-center justify-between p-4 border-b border-gray-200 h-[8%]">
                     <Link to={'/'}><img className='w-[50px]' src={logoIcon} alt="" /></Link>
                     <button
