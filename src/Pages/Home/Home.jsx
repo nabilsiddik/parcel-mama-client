@@ -3,6 +3,7 @@ import StatisticsSection from '../../Sections/StatisticsSection/StatisticsSectio
 import TopDeliveryManSection from '../../Sections/TopDeliveryManSection/TopDeliveryManSection'
 import BannerSection from '@/Sections/BannerSection/BannerSection'
 import FeaturesSection from '@/Sections/FeaturesSection/FeaturesSection'
+import MapSection from '@/Sections/MapSection/MapSection'
 
 
 const Home = () => {
@@ -16,6 +17,7 @@ const Home = () => {
       <StatisticsSection />
       <div className="container">
         <TopDeliveryManSection />
+        <MapSection/>
       </div>
     </div>
   )

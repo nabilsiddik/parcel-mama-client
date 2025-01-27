@@ -7,12 +7,27 @@ import { Link, NavLink, Outlet } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import logoIcon from '../../assets/delivery.png'
 import useAdmin from '@/CustomHooks/useAdmin';
+import { useQuery } from '@tanstack/react-query';
+import axios from 'axios';
 
 const DashboardHome = () => {
     const [isAdmin] = useAdmin()
     const [isSidebarOpen, setIsSidebarOpen] = useState(true);
     const { userSignOut } = useContext(authContext)
+    const {user} = useContext(authContext)
 
+    const {
+        data: currentUser = {},
+      } = useQuery({
+        queryKey: ["user", user?.email],
+        queryFn: async () => {
+          const { data } = await axios.get(
+            `${import.meta.env.VITE_MAIN_URL}/user/${user?.email}`
+          );
+    
+          return data;
+        },
+      });
 
     const handleLogout = () => {
         const swalWithBootstrapButtons = Swal.mixin({
@@ -75,7 +90,11 @@ const DashboardHome = () => {
             <div className="flex-1 flex flex-col">
                 {/* Header */}
                 <header className="bg-white border-b border-gray-200 px-6 h-[8%] flex items-center justify-between">
-                    <h2 className="text-xl font-semibold">Admin Dashboard</h2>
+                    <h2 className="text-xl font-semibold">
+                        {currentUser.role === 'admin' && 'Admin Dashboard'}
+                        {currentUser.role === 'user' && 'User Dashboard'}
+                        {currentUser.role === 'deliveryman' && 'DeliveryMan Dashboard'}
+                    </h2>
                 </header>
 
                 {/* Content Area */}

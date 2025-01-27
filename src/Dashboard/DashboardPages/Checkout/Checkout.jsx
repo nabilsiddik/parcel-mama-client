@@ -6,6 +6,7 @@ import { useParams } from 'react-router-dom';
 
 const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PRIMARY_KEY)
 
+
 const Checkout = () => {
 
     const { parcelId } = useParams()

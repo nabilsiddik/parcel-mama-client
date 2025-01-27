@@ -69,6 +69,18 @@ body{
     border-bottom: 3px solid red;
 }
 
+
+#mobile_menu nav a.active{
+    background: #dc2626;
+    font-weight: bold;
+    color: white;
+    padding: 16px 20px;
+}
+#mobile_menu nav a{
+    padding: 0 20px;
+    font-weight: bold;
+}
+
 /* #stripe_payment_form .__PrivateStripeElement{
     display: none!important;
 } */
