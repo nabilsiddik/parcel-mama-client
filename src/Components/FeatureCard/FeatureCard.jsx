@@ -7,7 +7,7 @@ const FeatureCard = ({title, description, icon}) => {
           <img
             src={icon && icon}
             alt="icon"
-            className="w-24 h-24 group-hover:scale-[1.2] transition-all"
+            className="lg:w-24 lg:h-24 w-20 h-20  group-hover:scale-[1.2] transition-all"
           />
         </div>
         <h3 className="text-xl font-bold mb-2">{title && title}</h3>

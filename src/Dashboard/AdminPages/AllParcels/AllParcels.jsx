@@ -71,7 +71,7 @@ const AllParcels = () => {
 
   return (
     <div className="py-8">
-      <div className="mb-5 flex items-center justify-between">
+      {/* <div className="mb-5 flex items-center justify-between">
         <h3>All Parcels</h3>
         <div>
           <form onSubmit={handleSearchByDate} className="flex gap-2">
@@ -88,9 +88,9 @@ const AllParcels = () => {
             />
           </form>
         </div>
-      </div>
+      </div> */}
       <div>
-        <div className="rounded-md border">
+        <div className="">
           <Table>
             <TableHeader>
               <TableRow>

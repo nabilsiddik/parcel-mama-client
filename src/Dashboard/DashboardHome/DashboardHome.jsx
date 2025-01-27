@@ -14,20 +14,20 @@ const DashboardHome = () => {
     const [isAdmin] = useAdmin()
     const [isSidebarOpen, setIsSidebarOpen] = useState(true);
     const { userSignOut } = useContext(authContext)
-    const {user} = useContext(authContext)
+    const { user } = useContext(authContext)
 
     const {
         data: currentUser = {},
-      } = useQuery({
+    } = useQuery({
         queryKey: ["user", user?.email],
         queryFn: async () => {
-          const { data } = await axios.get(
-            `${import.meta.env.VITE_MAIN_URL}/user/${user?.email}`
-          );
-    
-          return data;
+            const { data } = await axios.get(
+                `${import.meta.env.VITE_MAIN_URL}/user/${user?.email}`
+            );
+
+            return data;
         },
-      });
+    });
 
     const handleLogout = () => {
         const swalWithBootstrapButtons = Swal.mixin({
@@ -53,25 +53,19 @@ const DashboardHome = () => {
     }
 
     return (
-        <div className="flex h-screen bg-gray-100">
-            {/* Sidebar */}
-            <aside
-                className={`${isSidebarOpen ? "w-64" : "w-50"
-                    } bg-white border-r border-gray-200 transition-all duration-300`}
-            >
+        <div className="flex h-screen bg-gray-100 overflow-x-hidden">
+            <aside className={`${isSidebarOpen ? 'translate-x-[0%]' : 'translate-x-[-100%]' } bg-[#ffcc00] border-r border-gray-200 transition-all duration-300 absolute xl:w-[15%] lg:w-[20%] w-[80%] min-h-screen z-10 lg:fixed`}>
                 <div className="flex items-center justify-between p-4 border-b border-gray-200 h-[8%]">
                     <Link to={'/'}><img className='w-[50px]' src={logoIcon} alt="" /></Link>
                     <button
                         onClick={() => setIsSidebarOpen(!isSidebarOpen)}
                         className="p-2 text-gray-500 hover:text-gray-900"
                     >
-                        {/* Bar icon */}
                         <FaBars />
 
                     </button>
                 </div>
 
-                {/* Sidebar Menu */}
                 <div className='flex flex-col justify-between h-[92%] py-5'>
                     <div>
                         <SideMenu />
@@ -86,10 +80,9 @@ const DashboardHome = () => {
                 </div>
             </aside>
 
-            {/* Main Content */}
-            <div className="flex-1 flex flex-col">
-                {/* Header */}
-                <header className="bg-white border-b border-gray-200 px-6 h-[8%] flex items-center justify-between">
+            <div className="flex flex-col w-full">
+                <header className="border-b border-gray-200 px-6 h-[8%] flex items-center gap-5">
+                    <FaBars onClick={() => setIsSidebarOpen(!isSidebarOpen)} className='text-2xl cursor-pointer' />
                     <h2 className="text-xl font-semibold">
                         {currentUser.role === 'admin' && 'Admin Dashboard'}
                         {currentUser.role === 'user' && 'User Dashboard'}
@@ -97,13 +90,12 @@ const DashboardHome = () => {
                     </h2>
                 </header>
 
-                {/* Content Area */}
-                <div className='px-5 h-[85%] overflow-auto'>
+
+                <div className={`px-5 h-[85%] ${isSidebarOpen && 'w-[80%] ml-auto'}`}>
                     <Outlet />
                 </div>
 
-                {/* Footer */}
-                <footer className="bg-white border-t border-gray-200 px-6 h-[7%] text-center flex items-center justify-center">
+                <footer className="border-t border-gray-200 px-6 h-[7%] text-center flex items-center justify-center">
                     <p className="text-gray-600 text-sm">
                         © 2025 Parcel Mama. All rights reserved.
                     </p>

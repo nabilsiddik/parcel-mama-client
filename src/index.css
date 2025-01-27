@@ -26,7 +26,7 @@ h3{
     font-size: 24px;
     font-weight: bold;
 }
-h1, h2, h3, h4, h5, h6{
+h2, h3, h4, h5, h6{
     font-family: "Roboto", serif;
 }
 
@@ -81,15 +81,13 @@ body{
     font-weight: bold;
 }
 
-/* #stripe_payment_form .__PrivateStripeElement{
-    display: none!important;
-} */
 
-/* #banner_section .bg-overlay{
-    width: 100%;
-    height: 100%;
-    background: #000;
-    opacity: 0.4;
-    position: absolute;
-    z-index: 1;
-} */
+
+
+
+/** responsive css **/
+@media screen and (max-width: 768px){
+    #banner_section{
+        height: 700px;
+    }
+}

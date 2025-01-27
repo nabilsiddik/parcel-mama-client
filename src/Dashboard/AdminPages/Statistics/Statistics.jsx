@@ -77,8 +77,8 @@ const Statistics = () => {
     <div className='py-8'>
       <h3>Statistics</h3>
       <div className='grid lg:grid-cols-2 gap-5'>
-        <div id='barChart' className='w-full border p-5'></div>
-        <div id='lineChart' className='w-full border p-5'></div>
+        <div id='barChart' className='w-11/12 border p-5'></div>
+        <div id='lineChart' className='w-11/12 border p-5'></div>
       </div>
 
     </div>

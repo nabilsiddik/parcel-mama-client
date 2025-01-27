@@ -61,7 +61,7 @@ const StatisticsSection = () => {
 
   return (
     <div className='bg-[#fc0] py-8'>
-      <div className="container grid sm:grid-cols-3 gap-3 md:gap-5">
+      <div className="container grid sm:grid-cols-3 gap-20 md:gap-20">
         <StatisticsCard number={allParcels.length} text="Booked Parcels"/>
         <StatisticsCard number={deliveredParcels.length} text="Deliverd Parcels"/>
         <StatisticsCard number={allUsers.length} text="Registered Users"/>

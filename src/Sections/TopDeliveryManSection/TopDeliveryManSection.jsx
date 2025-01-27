@@ -37,8 +37,8 @@ const TopDeliveryManSection = () => {
                 {topDeliveryMens.length > 0 && topDeliveryMens.map((deliveryMan, index) => {
                     const { _id, name, image, numOfDeliveredParcel, avarageRating } = deliveryMan
                     const orderClass = index === 0 ? 'md:order-2' : index === 1 ? 'md:order-1' : 'md:order-3';
-                    return <Card key={_id} className={`${orderClass} ${
-                        index === 0 ? 'md:translate-y-[-20px] py-10 bg-yellow-500' : ''
+                    return <Card key={_id} className={`${orderClass} py-16 ${
+                        index === 0 ? 'md:translate-y-[-20px] bg-yellow-500' : ''
                     }`}>
                         <CardHeader>
                             <div className='text-center flex flex-col gap-3'>

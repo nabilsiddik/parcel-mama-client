@@ -17,7 +17,6 @@ const Home = () => {
       <StatisticsSection />
       <div className="container">
         <TopDeliveryManSection />
-        <MapSection/>
       </div>
     </div>
   )
