@@ -20,7 +20,7 @@ const MyParcels = () => {
   const { user } = useContext(authContext);
   const [isOpen, setIsOpen] = useState(false)
   const [parcelId, setParcelId] = useState(null)
-  const [selectedStatus, setSelectedStatus] = useState("pending")
+  const [selectedStatus, setSelectedStatus] = useState("all")
   const [sortedParcels, setSortedParcels] = useState([])
 
 
@@ -31,20 +31,22 @@ const MyParcels = () => {
   };
 
 
-  const getSortedData = async (status) => {
-    try {
-      const {data} = await axios.get(
-        `${import.meta.env.VITE_MAIN_URL}/sort-parcel?status=${status}`
-      );
-      setSortedParcels(data)
+  // useEffect(() => {
+  //   const fetchParcels = async () => {
+  //     try {
+  //       const response = await axios.get(`sort-parcel?status=${selectedStatus}`);
+  //       setSortedParcels(response.data);
+  //     } catch (error) {
+  //       console.error("Error fetching parcels:", error);
+  //       setSortedParcels([])
+  //     }
+  //   };
 
-    } catch (error) {
-      console.error("Error fetching sorted data:", error);
-    }
-  };
+  //   fetchParcels();
+  // }, [selectedStatus]);
 
-  
-console.log(sortedParcels)
+
+  // console.log(sortedParcels)
 
   const {
     data: parcels = [],
@@ -57,7 +59,7 @@ console.log(sortedParcels)
         `${import.meta.env.VITE_MAIN_URL}/my-parcels/${user?.email}`
       );
 
-      return data;
+      return data || [];
     },
   })
 
@@ -118,7 +120,7 @@ console.log(sortedParcels)
 
   return (
     <div className="py-8">
-      <div className="mb-5 flex items-center justify-between">
+      {/* <div className="mb-5 flex items-center justify-between">
         <h3>My Parcels</h3>
         <select onChange={handleStatusChange} value={selectedStatus} className="select select-bordered">
           <option value="pending">Pending</option>
@@ -126,7 +128,7 @@ console.log(sortedParcels)
           <option value="cancled">Cancled</option>
           <option value="delivered">Delivered</option>
         </select>
-      </div>
+      </div> */}
       <ReviewModal isOpen={isOpen} setIsOpen={setIsOpen} parcelId={parcelId} />
       <div className="rounded-md border">
         <Table>
@@ -143,43 +145,43 @@ console.log(sortedParcels)
           </TableHeader>
 
           <TableBody>
-            {(sortedParcels.length > 0 ? sortedParcels : parcels).map((parcel) => {
-                const {
-                  _id,
-                  parcelType,
-                  deliveryAddress,
-                  deliveryDate,
-                  bookingDate,
-                  status,
-                  apprDeliDate,
-                  reqDeliveryDate,
-                } = parcel;
-                return (
-                  <TableRow key={_id}>
-                    <TableCell>{parcelType && parcelType}</TableCell>
-                    <TableCell>{deliveryAddress && deliveryAddress}</TableCell>
-                    <TableCell>{reqDeliveryDate && reqDeliveryDate}</TableCell>
-                    <TableCell>{apprDeliDate && apprDeliDate}</TableCell>
-                    <TableCell>{bookingDate && new Date(bookingDate).toLocaleDateString()}</TableCell>
-                    <TableCell>{status && status}</TableCell>
-                    <TableCell>
-                      <div className="flex gap-2 mb-3">
-                        <Link to={status === 'pending' ? `/dashboard/update-parcel/${_id}` : ''}>
-                          <Button disabled={status === 'pending' ? false : true}>Update</Button>
-                        </Link>
+            {parcels.map((parcel) => {
+              const {
+                _id,
+                parcelType,
+                deliveryAddress,
+                deliveryDate,
+                bookingDate,
+                status,
+                apprDeliDate,
+                reqDeliveryDate,
+              } = parcel;
+              return (
+                <TableRow key={_id}>
+                  <TableCell>{parcelType && parcelType}</TableCell>
+                  <TableCell>{deliveryAddress && deliveryAddress}</TableCell>
+                  <TableCell>{reqDeliveryDate && reqDeliveryDate}</TableCell>
+                  <TableCell>{apprDeliDate && apprDeliDate}</TableCell>
+                  <TableCell>{bookingDate && new Date(bookingDate).toLocaleDateString()}</TableCell>
+                  <TableCell>{status && status}</TableCell>
+                  <TableCell>
+                    <div className="flex gap-2 mb-3">
+                      <Link to={status === 'pending' ? `/dashboard/update-parcel/${_id}` : ''}>
+                        <Button disabled={status === 'pending' ? false : true}>Update</Button>
+                      </Link>
 
-                        <Button disabled={status === 'pending' ? false : true} onClick={() => handleCancleParcel(_id)}>Cancle</Button>
-                      </div>
-                      <div className="flex gap-2">
-                        <Button onClick={() => handleReview(_id)}>Review</Button>
-                        <Link to={`/dashboard/checkout/${_id}`}>
-                          <Button>Pay</Button>
-                        </Link>
-                      </div>
-                    </TableCell>
-                  </TableRow>
-                )
-              })}
+                      <Button disabled={status === 'pending' ? false : true} onClick={() => handleCancleParcel(_id)}>Cancle</Button>
+                    </div>
+                    <div className="flex gap-2">
+                      <Button onClick={() => handleReview(_id)}>Review</Button>
+                      <Link to={`/dashboard/checkout/${_id}`}>
+                        <Button>Pay</Button>
+                      </Link>
+                    </div>
+                  </TableCell>
+                </TableRow>
+              )
+            })}
           </TableBody>
         </Table>
       </div>

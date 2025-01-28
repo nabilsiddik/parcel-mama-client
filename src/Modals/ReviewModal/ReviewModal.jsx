@@ -128,8 +128,8 @@ const ReviewModal = ({ isOpen, setIsOpen, parcelId }) => {
         <div>
             <Dialog open={isOpen} onClose={() => setIsOpen(false)} className="relative z-50">
                 <div className="fixed inset-0 flex w-full items-center justify-center p-2">
-                    <DialogPanel className="w-10/12 md:w-8/12 lg:w-6/12 space-y-4 border p-10 shadow-xl bg-white text-black rounded-lg">
-                        <DialogTitle className="font-bold text-center text-3xl">Give Review</DialogTitle>
+                    <DialogPanel className="w-10/12 md:w-8/12 lg:w-6/12 space-y-4 border p-4 md:p-10 pt-5 shadow-xl bg-white text-black rounded-lg">
+                        <DialogTitle className="font-bold text-center text-2xl md:text-3xl">Give Review</DialogTitle>
 
                         <form onSubmit={(e) => handleSubmitReview(parcelId, e)}>
                             <div className='mb-3'>

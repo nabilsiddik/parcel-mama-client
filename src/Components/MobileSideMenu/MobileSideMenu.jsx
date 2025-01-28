@@ -16,9 +16,9 @@ const MobileSideMenu = ({ mobileMenuActive }) => {
     }
 
     return (
-        <div id='mobile_menu' className={`z-[99999] absolute top-full shadow-xl bg-yellow-500 min-h-screen py-5 w-10/12 transition-all duration-1000 ${mobileMenuActive ? 'translate-x-[0%]' : 'translate-x-[-100%]'}`}>
+        <div id='mobile_menu' className={`z-[99999] absolute top-full shadow-xl bg-yellow-500 min-h-screen py-5 w-11/12 transition-all duration-1000 ${mobileMenuActive ? 'translate-x-[0%]' : 'translate-x-[-100%]'}`}>
             {user?.email &&
-                <div className='px-5 mb-8 '>
+                <div className='px-3 md:px-5 mb-8 '>
                     <div className='flex items-center gap-3'>
                         <div>
                             <Avatar className='border-4 w-12 h-12 border-red-600 cursor-pointer'>

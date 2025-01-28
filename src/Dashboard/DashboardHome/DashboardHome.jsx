@@ -9,6 +9,8 @@ import logoIcon from '../../assets/delivery.png'
 import useAdmin from '@/CustomHooks/useAdmin';
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
+import { FiLogOut } from "react-icons/fi";
+
 
 const DashboardHome = () => {
     const [isAdmin] = useAdmin()
@@ -54,7 +56,7 @@ const DashboardHome = () => {
 
     return (
         <div className="flex bg-gray-100 overflow-x-hidden h-screen">
-            <aside className={`${isSidebarOpen ? 'translate-x-[0%]' : 'translate-x-[-100%]' } bg-[#ffcc00] border-r border-gray-200 transition-all duration-300 absolute xl:w-[15%] lg:w-[20%] w-[80%] min-h-screen z-10 lg:fixed flex flex-col  h-screen`}>
+            <aside className={`${isSidebarOpen ? 'translate-x-[0%]' : 'translate-x-[-100%]'} bg-[#ffcc00] border-r border-gray-200 transition-all duration-300 absolute xl:w-[15%] lg:w-[20%] w-[80%] min-h-screen z-10 lg:fixed flex flex-col  h-screen`}>
                 <div className="flex items-center justify-between p-4 border-b border-gray-200 h-[8%]">
                     <Link to={'/'}><img className='w-[50px]' src={logoIcon} alt="" /></Link>
                     <button
@@ -73,7 +75,7 @@ const DashboardHome = () => {
                     <nav className='p-4'>
                         <ul>
                             <NavLink onClick={handleLogout} className={"font-bold text-black"}>
-                                Logout
+                                <span className='flex items-center gap-3'><FiLogOut /> Logout</span>
                             </NavLink>
                         </ul>
                     </nav>
@@ -91,11 +93,11 @@ const DashboardHome = () => {
                 </header>
 
 
-                <div className={`px-5 h-[85%] ${isSidebarOpen && 'w-[80%] ml-auto'}`}>
+                <div className={`px-5 h-[85%] ${isSidebarOpen && 'w-[80%] ml-auto'} overflow-auto`}>
                     <Outlet />
                 </div>
 
-                <footer className="border-t border-gray-200 px-6 h-[7%] text-center flex items-center justify-center">
+                <footer className="border-t bg-white border-gray-200 px-6 h-[7%] text-center flex items-center justify-center">
                     <p className="text-gray-600 text-sm">
                         © 2025 Parcel Mama. All rights reserved.
                     </p>

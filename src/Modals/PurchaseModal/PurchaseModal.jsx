@@ -80,6 +80,7 @@ const PurchaseModal = ({isOpen, setIsOpen, plant, refetch}) => {
             <div className="flex gap-4">
               <button onClick={() => setIsOpen(false)}>Close</button>
             </div>
+            <button>close</button>
           </DialogPanel>
         </div>
       </Dialog>

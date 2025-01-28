@@ -43,7 +43,7 @@ const MyProfile = () => {
 
   return (
     <div className="">
-      <div className="p-5 shadow-lg rounded-lg">
+      <div className="p-2 sm:p-5 py-5 shadow-lg rounded-lg">
         <div id="profile_cover"></div>
         <div className="avatar flex justify-center mt-[-80px]">
           <div className="mask mask-hexagon w-[150px]">

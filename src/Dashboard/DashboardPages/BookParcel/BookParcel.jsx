@@ -101,12 +101,11 @@ const BookParcel = () => {
         <div className="w-1/2 border flex items-center hidden xl:block">
           <img className="" src={parcelBooking} alt="delivery man with parcel" />
         </div>
-        <form className="xl:w-1/2 border p-10" onSubmit={handleAddParcel}>
+        <form className="xl:w-1/2 border p-4 sm:p-6 md:p-10" onSubmit={handleAddParcel}>
           <div className="mb-4 flex items-center gap-5">
             <div className="w-1/2">
               <Label htmlFor="phoneNumber">Phone Number <span className="text-red-600">*</span></Label>
               <Input
-                max='11'
                 id="phoneNumber"
                 name="phoneNumber"
                 type="number"

@@ -6,6 +6,8 @@ import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "@/CustomHooks/useAxiosSecure";
 import Swal from "sweetalert2";
+import { IoCloseSharp } from "react-icons/io5";
+
 
 const ManageParcelModal = ({ isOpen, setIsOpen, _id }) => {
   const axiosSecure = useAxiosSecure()
@@ -37,26 +39,34 @@ const ManageParcelModal = ({ isOpen, setIsOpen, _id }) => {
     const deliveryMan = form.deliveryman.value
     const apprDelDate = form.apprDelDate.value
 
-
-    const res = await axiosSecure.patch(`${import.meta.env.VITE_MAIN_URL}/setdeliveryman/${_id}`, { deliveryMan, apprDelDate })
-    console.log(res.data)
-    if (res.data.modifiedCount) {
-      Swal.fire({
-        position: "center center",
-        icon: "success",
-        title: "Parcel Successfully Assigned",
-        showConfirmButton: false,
-        timer: 1500,
-      });
-    } else {
+    if (!deliveryMan || !apprDelDate) {
       Swal.fire({
         icon: "error",
-        title: "Oops...",
-        text: "Something went wrong!",
-        footer: `Parcel is not assigned`,
-      })
-    }
-  };
+        title: "Fields Missing",
+        text: "Please fill out the required fields."
+      });
+    } else {
+      const res = await axiosSecure.patch(`${import.meta.env.VITE_MAIN_URL}/setdeliveryman/${_id}`, { deliveryMan, apprDelDate })
+      console.log(res.data)
+      if (res.data.modifiedCount) {
+        Swal.fire({
+          position: "center center",
+          icon: "success",
+          title: "Parcel Successfully Assigned",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      } else {
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Something went wrong!",
+          footer: `Parcel is not assigned`,
+        })
+      }
+    };
+  }
+
 
   return (
     <div>
@@ -72,7 +82,7 @@ const ManageParcelModal = ({ isOpen, setIsOpen, _id }) => {
               transition
               className="w-full max-w-md rounded-xl bg-white p-6 backdrop-blur-2xl duration-300 ease-out data-[closed]:transform-[scale(95%)] data-[closed]:opacity-0 shadow-lg"
             >
-              <DialogTitle as="h3" className="text-base/7 font-medium">
+              <DialogTitle as="h3" className="text-xl mb-4 text-center font-medium">
                 Manage Parcel
               </DialogTitle>
 
@@ -107,10 +117,10 @@ const ManageParcelModal = ({ isOpen, setIsOpen, _id }) => {
 
               <div className="mt-4">
                 <Button
-                  className="btn w-full bg-black text-white"
+                  className="text-black text-3xl absolute top-5 right-5 "
                   onClick={() => setIsOpen(false)}
                 >
-                  Close Modal
+                  <IoCloseSharp />
                 </Button>
               </div>
             </DialogPanel>

@@ -71,24 +71,6 @@ const AllParcels = () => {
 
   return (
     <div className="py-8">
-      {/* <div className="mb-5 flex items-center justify-between">
-        <h3>All Parcels</h3>
-        <div>
-          <form onSubmit={handleSearchByDate} className="flex gap-2">
-            <input
-              name="dateFrom"
-              type="date"
-              className="input input-bordered"
-            />
-            <input name="dateTo" type="date" className="input input-bordered" />
-            <input
-              type="submit"
-              value={"Search"}
-              className="btn bg-purple-600 text-white"
-            />
-          </form>
-        </div>
-      </div> */}
       <div>
         <div className="">
           <Table>
@@ -113,6 +95,7 @@ const AllParcels = () => {
                     deliveryDate,
                     bookingDate,
                     status,
+                    reqDeliveryDate,
                     customer: { name },
                   } = parcel;
                   return (
@@ -120,7 +103,7 @@ const AllParcels = () => {
                       <TableCell>{name && name}</TableCell>
                       <TableCell>{phoneNumber && phoneNumber}</TableCell>
                       <TableCell>{price && price}</TableCell>
-                      <TableCell>{deliveryDate && new Date(deliveryDate).toLocaleDateString()}</TableCell>
+                      <TableCell>{reqDeliveryDate && reqDeliveryDate}</TableCell>
                       <TableCell>{bookingDate && new Date(bookingDate).toLocaleDateString()}</TableCell>
                       <TableCell>{status && status}</TableCell>
                       <TableCell>
