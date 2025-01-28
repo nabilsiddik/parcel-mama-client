@@ -9,7 +9,7 @@ import MapSection from '@/Sections/MapSection/MapSection'
 const Home = () => {
 
   return (
-    <div id='home_page'>
+    <div id='home_page' className='bg-white'>
       <BannerSection />
       <div className="container py-5">
         <FeaturesSection />

@@ -44,7 +44,7 @@ const Footer = () => {
             </div>
 
             <div className='bg-yellow-500 py-10 mt-10'>
-                <div className="container flex items-center justify-between">
+                <div className="container flex items-center justify-between flex-col md:flex-row">
                     <p className='text-center font-bold'>&copy; All right reserved 2025  Parcel Mama</p>
                     <img className='w-[100px]' src={stripeLogo} alt="" />
                 </div>

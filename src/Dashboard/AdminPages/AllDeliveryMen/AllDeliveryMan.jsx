@@ -30,7 +30,7 @@ const AllDeliveryMan = () => {
 
   return (
     <div id="all_deliveryman" className="py-8">
-      <h3 className="mb-3">All Users</h3>
+      <h3 className="mb-3">All Deliverymens</h3>
       <div className="rounded-md border">
         <Table>
           <TableHeader>
