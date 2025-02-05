@@ -49,17 +49,17 @@ npm install
 
 ## Setup Environment Variables
 Since `.env.local` files are not included in the repository, you need to create them manually.
-```plaintext
-VITE_apiKey=your_api_key
-VITE_authDomain=your_auth_domain
-VITE_projectId=your_project_id
-VITE_storageBucket=your_storage_bucket
-VITE_messagingSenderId=your_messaging_sender_id
-VITE_appId=your_app_id
-VITE_measurementId=your_measurement_id
-VITE_IMGBB_API_KEY=your_imgbb_api_key
-VITE_STRIPE_PRIMARY_KEY=your_stripe_primary_key
-VITE_MAIN_URL=your_main_url ```
+
+VITE_apiKey=your_api_key,
+VITE_authDomain=your_auth_domain,
+VITE_projectId=your_project_id,
+VITE_storageBucket=your_storage_bucket,
+VITE_messagingSenderId=your_messaging_sender_id,
+VITE_appId=your_app_id,
+VITE_measurementId=your_measurement_id,
+VITE_IMGBB_API_KEY=your_imgbb_api_key,
+VITE_STRIPE_PRIMARY_KEY=your_stripe_primary_key,
+VITE_MAIN_URL=your_main_url ,
 
 
 ## Start the Frontend
