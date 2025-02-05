@@ -1,11 +1,9 @@
 # Parcel Mama
 
-Welcome to **Parcel Mama**, number one parcel booking website in Bangladesh.
+Parcel Mama is an online parcel booking platform. It's a full-stack MERN project where customers can book parcels and make payments for their parcels, admins can manage users and parcels, and delivery men can manage the delivery from each of their Dashboards. The project has a high impact on parcel booking service.
 
-### Admin Credentials
-- **Username:** nabilsiddik
-- **Email:** nabilsiddik@gmail.com
-- **Password:** admin123456
+# Home Page
+<img src='https://i.ibb.co.com/vvwg35C8/parcel-mama.jpg' />
 
 ### Live Site URL
 Visit the live site here: [Parcel Mama](https://my-project-22db9.web.app)
