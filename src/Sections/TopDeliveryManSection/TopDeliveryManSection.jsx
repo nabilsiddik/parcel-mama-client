@@ -12,6 +12,7 @@ import {
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import SectionHeader from '@/Components/SectionHeader/SectionHeader';
 import StarRatings from 'react-star-ratings';
+import { Bounce, Fade } from 'react-awesome-reveal';
 
 const TopDeliveryManSection = () => {
 
@@ -37,36 +38,37 @@ const TopDeliveryManSection = () => {
                 {topDeliveryMens.length > 0 && topDeliveryMens.map((deliveryMan, index) => {
                     const { _id, name, image, numOfDeliveredParcel, avarageRating } = deliveryMan
                     const orderClass = index === 0 ? 'md:order-2' : index === 1 ? 'md:order-1' : 'md:order-3';
-                    return <Card key={_id} className={`${orderClass} py-16 ${
-                        index === 0 ? 'md:translate-y-[-20px] bg-yellow-500' : ''
-                    }`}>
-                        <CardHeader>
-                            <div className='text-center flex flex-col gap-3'>
-                                <Avatar className='mx-auto w-[100px] h-[100px]'>
-                                    <AvatarImage src={image} />
-                                    <AvatarFallback>CN</AvatarFallback>
-                                </Avatar>
-                                <CardTitle>
-                                    <h3>{name}</h3>
-                                </CardTitle>
-                                <CardDescription>
-                                    <p className='font-bold text-lg text-black'>Delivered Parcel: {numOfDeliveredParcel ? numOfDeliveredParcel : 0}</p>
-                                </CardDescription>
+                    const fadeDirection = index === 0 ? 'left' : index === 2 ? 'right' : 'top'
+                    return <Fade key={_id} direction={fadeDirection}>
+                        <Card className={`${orderClass} py-16 `}>
+                            <CardHeader>
+                                <div className='text-center flex flex-col gap-3'>
+                                    <Avatar className='mx-auto w-[100px] h-[100px]'>
+                                        <AvatarImage src={image} />
+                                        <AvatarFallback>CN</AvatarFallback>
+                                    </Avatar>
+                                    <CardTitle>
+                                        <h3>{name}</h3>
+                                    </CardTitle>
+                                    <CardDescription>
+                                        <p className='font-bold text-lg text-black'>Delivered Parcel: {numOfDeliveredParcel ? numOfDeliveredParcel : 0}</p>
+                                    </CardDescription>
 
-                                <StarRatings
-                                    rating={avarageRating && avarageRating}
-                                    starDimension="20px"
-                                    starSpacing="5px"
-                                    starRatedColor={index === 0 ? 'red' : '#f39c12'}
-                                    starEmptyColor="#7f8c8d"
-                                />
+                                    <StarRatings
+                                        rating={avarageRating && avarageRating}
+                                        starDimension="20px"
+                                        starSpacing="5px"
+                                        starRatedColor={index === 0 ? 'red' : '#f39c12'}
+                                        starEmptyColor="#7f8c8d"
+                                    />
 
-                                <CardDescription>
-                                    <p className='text-black'>{name && name} has delivered <b>{numOfDeliveredParcel && numOfDeliveredParcel}</b> parcels with an avarage rating of <b>{avarageRating && avarageRating.toFixed(2)}</b></p>
-                                </CardDescription>
-                            </div>
-                        </CardHeader>
-                    </Card>
+                                    <CardDescription>
+                                        <p className='text-black'>{name && name} has delivered <b>{numOfDeliveredParcel && numOfDeliveredParcel}</b> parcels with an avarage rating of <b>{avarageRating && avarageRating.toFixed(2)}</b></p>
+                                    </CardDescription>
+                                </div>
+                            </CardHeader>
+                        </Card>
+                    </Fade>
                 })}
             </div>
         </div>

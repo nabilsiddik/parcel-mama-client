@@ -1,25 +1,35 @@
 import React from 'react'
-import { Input } from "@/components/ui/input"
-import { Button } from '@/Components/ui/button'
-
+import Lottie from "lottie-react";
+import deliveryBoy from "../../assets/lotties/delivery-boy.json";
+import deliveryBoy1 from "../../assets/lotties/delivery-man-calling-customer.json";
+import deliveryBoy2 from "../../assets/lotties/online-delivery-service.json";
+import { Button } from '@headlessui/react';
+import { FaGooglePlay } from "react-icons/fa";
+import { FaApple } from "react-icons/fa";
+import { Fade } from "react-awesome-reveal";
 
 const BannerSection = () => {
     return (
-        <section id='banner_section' className='relative'>
-            <div className="absolute inset-0 bg-black bg-opacity-60 z-10">
-                
-            </div>
+        <section id='banner_section' className='relative '>
             <div className="relative container flex items-center justify-center h-[800px] z-20">
-                    <div className='text-white'>
-                        <h1 className='text-center mb-8 text-3xl md:text-4xl lg:text-5xl'>Parcel Mama - No. 1 <br />Parcel Delivery Service in Banglades</h1>
-                        <form className='w-11/12 md:w-8/12 lg:w-6/12 mx-auto'>
-                            <div className="flex w-full max-w-sm items-center space-x-1 mx-auto">
-                                <Input className='py-6 custom-input' type="email" placeholder="Tracking Number" />
-                                <Button variant = "destructive" type="submit" className='py-6'>Track Now</Button>
+                <div className='flex items-center justify-between'>
+                    <div className='flex-1'>
+                        <Fade>
+                            <h1 className=' mb-8 text-3xl md:text-5xl lg:text-5xl'>Fast & Reliable Parcel Delivery</h1>
+                            <p>Parcel Mama deliver fast and secure delivery and always believe in customer satisfection.</p>
+                            <div className="flex items-center gap-5 mt-5">
+                                <button className='btn bg-red-600 border-2 border-red-600 hover:text-red-600 text-white hover:bg-[transparent] hover:border-red-600'>Download App <FaGooglePlay />
+                                </button>
+                                <button className='btn bg-[transparent] border-2 border-red-600 text-red-600 hover:bg-red-600 hover:text-white hover:border-red-600'>Download App <FaApple />
+                                </button>
                             </div>
-                        </form>
+                        </Fade>
+                    </div>
+                    <div className='flex-1'>
+                        <Lottie animationData={deliveryBoy2} loop={true} />
                     </div>
                 </div>
+            </div>
         </section>
     )
 }
