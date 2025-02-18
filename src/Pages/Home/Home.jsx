@@ -5,6 +5,8 @@ import BannerSection from '@/Sections/BannerSection/BannerSection'
 import FeaturesSection from '@/Sections/FeaturesSection/FeaturesSection'
 import MapSection from '@/Sections/MapSection/MapSection'
 import RecentBooking from '@/Sections/RecentBookingSection/RecentBooking'
+import NewsletterSection from '@/Sections/NewsletterSection/NewsletterSection'
+import FaqSection from '@/Sections/FaqSection/FaqSection'
 
 
 const Home = () => {
@@ -22,6 +24,8 @@ const Home = () => {
       <div className="container">
         <RecentBooking/>
       </div>
+      <NewsletterSection/>
+      <FaqSection/>
     </div>
   )
 }
