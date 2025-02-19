@@ -10,7 +10,7 @@ const FaqSection = () => {
             <div className="container">
                 <SectionHeader title={'FAQ'} description={'Here are some of the frequently asked questions that may be coming to your mind.'} />
 
-                <div className='flex items-center'>
+                <div className='flex items-center flex-col md:flex-row'>
                     <div className='flex-1'>
                         <Lottie animationData={faqLottie}/>
                     </div>

@@ -1,12 +1,18 @@
 import React from 'react'
+import errorLottie from '../../assets/lotties/404-error.json'
+import Lottie from 'lottie-react'
+import { Link } from 'react-router-dom'
 
 const ErrorPage = () => {
     return (
         <div>
             <div className="container py-20">
                 <h1 className='text-center'>Opps! 404 Error</h1>
-                <div className="flex justify-center">
-                    <img className='w-[500px] text-center mt-10' src={'https://img.freepik.com/free-vector/oops-404-error-with-broken-robot-concept-illustration_114360-5529.jpg?t=st=1735625730~exp=1735629330~hmac=f658c8f48474b45747bbea55a8d063fc8c9e9f47e4c491c3891d723dcc75d986&w=826'} alt="" />
+                <div className="flex justify-center ml-20">
+                    <Lottie className='w-[500px]' animationData={errorLottie} />
+                </div>
+                <div className='flex justify-center mt-10'>
+                    <Link to={'/'} className='btn bg-red-600 border-2 border-red-600 hover:text-red-600 text-white hover:bg-[transparent] hover:border-red-600'>Go to Home</Link>
                 </div>
             </div>
         </div>

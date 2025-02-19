@@ -26,6 +26,7 @@ import PaymentSuccess from "./Dashboard/DashboardPages/PaymentSuccess/PaymentSuc
 import AdminRoute from "./PrivateRoute/AdminRoute";
 import MyReviews from "./Dashboard/DeliveryManPages/AllReviews/MyReviews.jsx";
 import ParcelContextProvider from "./Contexts/ParcelContext/ParcelContext";
+import ContactPage from "./Pages/ContactPage/ContactPage";
 
 const queryClient = new QueryClient();
 
@@ -38,6 +39,10 @@ const route = createBrowserRouter([
       {
         path: "/",
         element: <Home />,
+      },
+      {
+        path: '/contact',
+        element: <ContactPage />,
       },
       {
         path: "/authentication",
@@ -135,6 +140,7 @@ const route = createBrowserRouter([
       }
     ],
   },
+
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(

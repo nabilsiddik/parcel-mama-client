@@ -10,7 +10,7 @@ import { Label } from "@/components/ui/label"
 
 const MyProfile = () => {
   const { user, profileUpdate } = useContext(authContext);
-  const [selectedImiage, setSelectedImage] = useState(null);
+  const [selectedImage, setSelectedImage] = useState(null);
   const [name, setName] = useState('');
 
   const handleImageChange = (e) => {
@@ -36,7 +36,7 @@ const MyProfile = () => {
   });
 
   const handleUpdateProfile = async () => {
-    const imageUrl = await imageUpload(selectedImiage);
+    const imageUrl = await imageUpload(selectedImage);
     await profileUpdate({ displayName: name, photoURL: imageUrl });
     await refetch()
   };
@@ -52,6 +52,7 @@ const MyProfile = () => {
         </div>
         <h3 className="text-center mt-3 mb-1">Hey, {user?.displayName}</h3>
         <p className="text-center">{user?.email}</p>
+        <p className="text-center">{user?.phone}</p>
         <div className="flex justify-center mt-4">
           <Badge className={'py-2 px-6'} variant="destructive">{currentUser.role}</Badge>
         </div>

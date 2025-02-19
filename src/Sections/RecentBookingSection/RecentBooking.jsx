@@ -36,6 +36,10 @@ const RecentBooking = () => {
                     slidesPerView={3} 
                     loop={true} 
                     breakpoints={{
+                        0: {
+                            slidesPerView: 1, 
+                            spaceBetween: 10,
+                        },
                         640: {
                             slidesPerView: 1, 
                             spaceBetween: 10,

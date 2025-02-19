@@ -37,7 +37,7 @@ const Header = () => {
     }
 
     return (
-        <header id='header' className='bg-gradient-to-r from-[#fc0] to-[#fc0] shadow-xl py-2 border-b-2 border-gray fixed w-full z-[999]'>
+        <header id='header' className='bg-gradient-to-r from-[#fc0] to-[#fc0] shadow-xl py-1 border-b-2 border-gray fixed w-full z-[999]'>
             <MobileSideMenu mobileMenuActive={mobileMenuActive} />
             <div className="container py-5 flex items-center justify-between">
 
@@ -55,8 +55,10 @@ const Header = () => {
 
                 <nav className="menu hidden sm:block">
                     <ul className='flex items-center gap-5'>
-                        <NavLink to={'/'} className={'text-xl'}>Home</NavLink>
-                        {user?.email && <NavLink to={'/dashboard'} className={'text-xl w-full block rounded-lg'}>Dashboard</NavLink>}
+                        <NavLink to={'/'} className={'text-lg'}>Home</NavLink>
+                        {user?.email && <NavLink to={'/dashboard'} className={'text-lg w-full block rounded-lg'}>Dashboard</NavLink>}
+                        {user?.email && <NavLink to={'/dashboard/my-profile'} className={'text-lg w-full block rounded-lg'}>My Profile</NavLink>}
+                        <NavLink to='/contact' className={'text-lg w-full block rounded-lg'}>Contact</NavLink>
                     </ul>
                 </nav>
 

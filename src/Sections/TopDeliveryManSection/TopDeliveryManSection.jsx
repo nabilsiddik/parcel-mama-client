@@ -32,14 +32,13 @@ const TopDeliveryManSection = () => {
 
 
     return (
-        <div className='my-20'>
+        <div>
             <SectionHeader title={'Our Top Deliverymen'} description={'Here is our top 3 Deliveryman working consistantly, delivered lots of product and has a good reviews'} />
             <div className="grid md:grid-cols-3 gap-4 mt-14">
                 {topDeliveryMens.length > 0 && topDeliveryMens.map((deliveryMan, index) => {
                     const { _id, name, image, numOfDeliveredParcel, avarageRating } = deliveryMan
                     const orderClass = index === 0 ? 'md:order-2' : index === 1 ? 'md:order-1' : 'md:order-3';
-                    const fadeDirection = index === 0 ? 'left' : index === 2 ? 'right' : 'top'
-                    return <Fade key={_id} direction={fadeDirection}>
+                    return <Fade key={_id}>
                         <Card className={`${orderClass} py-16 `}>
                             <CardHeader>
                                 <div className='text-center flex flex-col gap-3'>

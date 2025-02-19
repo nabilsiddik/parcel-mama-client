@@ -8,13 +8,13 @@ import { Fade } from "react-awesome-reveal";
 const FeaturesSection = () => {
   return (
     <div className='my-16 grid md:grid-cols-3 gap-3 lg:gap-5'>
-      <Fade direction='left'>
+      <Fade>
         <FeatureCard title={'100% Safe Delivery'} description={'We Ensure secure and reliable delivery every time.'} icon={safeDelivery} />
       </Fade>
-      <Fade direction='top'>
+      <Fade>
         <FeatureCard title={'Super Fast Delivery'} description={'Get your parcels delivered in record time.'} icon={fastDelivery} />
       </Fade>
-      <Fade direction='right'>
+      <Fade>
         <FeatureCard title={'24/7 support'} description={'You will get 24/7 suuport no mater what time is it.'} icon={support} />
       </Fade>
     </div>
