@@ -27,6 +27,7 @@ import AdminRoute from "./PrivateRoute/AdminRoute";
 import MyReviews from "./Dashboard/DeliveryManPages/AllReviews/MyReviews.jsx";
 import ParcelContextProvider from "./Contexts/ParcelContext/ParcelContext";
 import ContactPage from "./Pages/ContactPage/ContactPage";
+import AboutUs from "./Pages/AboutUs/AboutUs";
 
 const queryClient = new QueryClient();
 
@@ -39,6 +40,10 @@ const route = createBrowserRouter([
       {
         path: "/",
         element: <Home />,
+      },
+      {
+        path: '/about',
+        element: <AboutUs/>
       },
       {
         path: '/contact',

@@ -24,8 +24,8 @@ const Footer = () => {
                 </div>
                 <nav>
                     <h6 className="footer-title">Quick Links</h6>
-                    <NavLink to={'/'}>Customer Service</NavLink>
-                    <NavLink to={'/'}>Developar Portal</NavLink>
+                    <NavLink to={'https://www.termsfeed.com/live/4fe3b583-9faf-439f-aabc-8a9ecd6bfafd'}>Privacy Policy</NavLink>
+                    <NavLink to={'https://www.termsfeed.com/live/c10e147f-0910-4c37-94c0-3485b106caa4'}>Terms & Conditions</NavLink>
                 </nav>
 
                 <div>

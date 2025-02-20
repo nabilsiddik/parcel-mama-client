@@ -11,7 +11,7 @@ const NewsletterSection = () => {
                     <div>
                         <Lottie className='w-[350px]' animationData={newsletterLottie}></Lottie>
                     </div>
-                    <div className='text-center md:text-left'>
+                    <div className='text-center md:text-left pb-28 md:pb-0'>
                         <h3 className='text-4xl'>Subscribe Our Newsletter</h3>
                         <p className='my-3 w-11/12 md:w-10/12 lg:w-[8/12]'>Subscribe our newsletter to get regular update and offers about our deliver services.</p>
                         <form className='flex items-stretch justify-center md:justify-start'>

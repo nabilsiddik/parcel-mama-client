@@ -56,6 +56,7 @@ const Header = () => {
                 <nav className="menu hidden sm:block">
                     <ul className='flex items-center gap-5'>
                         <NavLink to={'/'} className={'text-lg'}>Home</NavLink>
+                        <NavLink to={'/about'} className={'text-lg'}>About Us</NavLink>
                         {user?.email && <NavLink to={'/dashboard'} className={'text-lg w-full block rounded-lg'}>Dashboard</NavLink>}
                         {user?.email && <NavLink to={'/dashboard/my-profile'} className={'text-lg w-full block rounded-lg'}>My Profile</NavLink>}
                         <NavLink to='/contact' className={'text-lg w-full block rounded-lg'}>Contact</NavLink>
