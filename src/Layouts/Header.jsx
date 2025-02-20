@@ -44,10 +44,10 @@ const Header = () => {
                 <Link to={'/'}>
                     <div className="logo ">
                         <a className="text-xl flex items-center gap-4">
-                            <img className='w-[60px]' src={logo} alt="" />
+                            <img className='w-[40px] md:w-[60px]' src={logo} alt="" />
                             <div className='ml-[-8px]'>
-                                <h3 className='font-bold text-3xl'>PARCEL</h3>
-                                <h4 className='font-bold text-2xl mt-[-10px] ml-[10px] text-[#ff3f34] '>mama</h4>
+                                <h3 className='font-bold text-2xl md:text-3xl'>PARCEL</h3>
+                                <h4 className='font-bold text-xl md:text-2xl mt-[-10px] ml-[10px] text-[#ff3f34] '>mama</h4>
                             </div>
                         </a>
                     </div>
@@ -56,9 +56,9 @@ const Header = () => {
                 <nav className="menu hidden sm:block">
                     <ul className='flex items-center gap-5'>
                         <NavLink to={'/'} className={'text-lg'}>Home</NavLink>
-                        <NavLink to={'/about'} className={'text-lg'}>About Us</NavLink>
+                        <NavLink to={'/about'} className={'text-lg'}>About</NavLink>
                         {user?.email && <NavLink to={'/dashboard'} className={'text-lg w-full block rounded-lg'}>Dashboard</NavLink>}
-                        {user?.email && <NavLink to={'/dashboard/my-profile'} className={'text-lg w-full block rounded-lg'}>My Profile</NavLink>}
+                        {user?.email && <NavLink to={'/dashboard/my-profile'} className={'text-lg w-full block rounded-lg'}>Profile</NavLink>}
                         <NavLink to='/contact' className={'text-lg w-full block rounded-lg'}>Contact</NavLink>
                     </ul>
                 </nav>

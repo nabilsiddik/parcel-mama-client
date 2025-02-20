@@ -18,8 +18,8 @@ const FaqSection = () => {
                         {faqs.length > 0 && faqs.map((faq) => {
                             return <div key={faq.id} className="collapse collapse-plus bg-base-200 mb-3 border border-yellow-500">
                                 <input type="radio" name="my-accordion-3" defaultChecked />
-                                <div className="collapse-title text-xl font-medium">{faq.question}</div>
-                                <div className="collapse-content">
+                                <div className="collapse-title text-xl font-medium bg-white">{faq.question}</div>
+                                <div className="collapse-content bg-white">
                                     <p>{faq.answer}</p>
                                 </div>
                             </div>

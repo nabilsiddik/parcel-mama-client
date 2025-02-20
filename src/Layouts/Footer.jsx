@@ -35,9 +35,7 @@ const Footer = () => {
                         </a></li>
                         <li className='w-[30px] h-[30px] flex items-center justify-center bg-white rounded-full text-black'><a href="https://www.linkedin.com/in/nabilsiddik/"><FaLinkedinIn />
                         </a></li>
-                        <li className='w-[30px] h-[30px] flex items-center justify-center bg-white rounded-full text-black'><a href="https://www.linkedin.com/in/nabilsiddik/"><BsTwitterX />
-                        </a></li>
-                        <li className='w-[30px] h-[30px] flex items-center justify-center bg-white rounded-full text-black'><a href="https://www.linkedin.com/in/nabilsiddik/"><FaYoutube />
+                        <li className='w-[30px] h-[30px] flex items-center justify-center bg-white rounded-full text-black'><a href="https://x.com/SiddikNabil"><BsTwitterX />
                         </a></li>
                     </ul>
                 </div>

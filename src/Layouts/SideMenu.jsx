@@ -61,6 +61,9 @@ const SideMenu = () => {
           <NavLink className={"font-bold text-black"} to={"all-users"}>
             <span className='flex items-center gap-3'><FaUser v /> Users</span>
           </NavLink>
+          <NavLink className={"font-bold text-black"} to={"my-profile"}>
+            <span className='flex items-center gap-3'><FaRegUserCircle className="text-2xl" /> My Profile</span>
+          </NavLink>
         </ul>
       )}
 
@@ -73,6 +76,9 @@ const SideMenu = () => {
           <NavLink className={"font-bold text-black"} to={"my-reviews"}>
             <span className='flex items-center gap-3'><VscFeedback className="text-2xl" />
               My Reviews</span>
+          </NavLink>
+          <NavLink className={"font-bold text-black"} to={"my-profile"}>
+            <span className='flex items-center gap-3'><FaRegUserCircle className="text-2xl" /> My Profile</span>
           </NavLink>
         </ul>
       )}

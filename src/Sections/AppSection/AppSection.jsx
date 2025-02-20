@@ -17,9 +17,9 @@ const AppSection = () => {
                 <Lottie animationData={mobileApp}/>
             </div>
             <div className='flex-1'>
-                <h2 className='mb-5'>Download our mobile App</h2>
-                <p>Download our mobile app from play store or app store. Mobile app will give you more better user experience and flexibility.</p>
-                <div className="flex items-center md:justify-start gap-5 mt-5">
+                <h2 className='mb-5 text-center md:text-left'>Download our mobile App</h2>
+                <p className='text-center md:text-left'>Download our mobile app from play store or app store. Mobile app will give you more better user experience and flexibility.</p>
+                <div className="flex items-center justify-center md:justify-start gap-5 mt-5">
                 <Link to={'https://play.google.com'}>
                   <button className="btn bg-red-600 border-2 border-red-600 hover:text-red-600 text-white hover:bg-[transparent] hover:border-red-600">
                     Download App <FaGooglePlay />
